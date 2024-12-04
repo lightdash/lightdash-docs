@@ -31,3 +31,11 @@ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
 
 If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+
+## API docs
+
+API docs are automatically generated from the [Lightdash API](https://github.com/lightdash/lightdash/tree/main/packages/backend) and hosted on this site. They are publicly available [here](https://docs.lightdash.com/api/v1)
+
+The source of truth for the API docs is the [OpenAPI spec](https://github.com/lightdash/lightdash/blob/main/packages/backend/src/generated/swagger.json) which is used to generate the docs.
+
+The [update-swagger.yml](.github/workflows/update-swagger.yml) GitHub Action runs on a schedule and updates the docs site with the latest API docs. You can also manually trigger a build by going to the [Github actions](https://github.com/lightdash/lightdash-docs/actions/workflows/update-swagger.yml) and clicking the "Run workflow" button.
