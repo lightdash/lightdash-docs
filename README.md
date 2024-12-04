@@ -1,4 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/0ed2850c-dbab-4c76-8bfe-c3706712fe34/deploy-status)](https://app.netlify.com/sites/peaceful-bassi-cbf284/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/f4b62438-cc8b-46f3-bfac-5069dd6315d4/deploy-status)](https://app.netlify.com/sites/lightdash-docs/deploys)
 
 
 
