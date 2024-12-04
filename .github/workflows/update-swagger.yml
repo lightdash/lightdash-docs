@@ -1,0 +1,44 @@
+name: Update Swagger JSON
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  update-swagger:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+                
+      - name: Download latest swagger.json
+        run: |
+          curl -o swagger_new.json https://raw.githubusercontent.com/lightdash/lightdash/main/packages/backend/src/generated/swagger.json
+          
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if [ ! -f swagger.json ]; then
+            echo "First time download - copying file"
+            cp swagger_new.json swagger.json
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          elif ! cmp -s swagger.json swagger_new.json; then
+            echo "Changes detected - updating file"
+            cp swagger_new.json swagger.json
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "No changes detected"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+          rm swagger_new.json
+
+      - name: Commit and push if changed
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add swagger.json
+          git commit -m "chore: update swagger.json from lightdash"
+          git push
