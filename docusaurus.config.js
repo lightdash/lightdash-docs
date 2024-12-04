@@ -164,7 +164,7 @@ module.exports = {
                 specs: [
                     {
                         id: 'api-v1',
-                        spec: '../packages/backend/src/generated/swagger.json',
+                        spec: 'swagger.json',
                         route: '/api/v1/',
                     },
                 ],

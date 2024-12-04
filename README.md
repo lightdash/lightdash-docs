@@ -1,3 +1,7 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/0ed2850c-dbab-4c76-8bfe-c3706712fe34/deploy-status)](https://app.netlify.com/sites/peaceful-bassi-cbf284/deploys)
+
+
+
 # Website
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
