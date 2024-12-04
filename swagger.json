@@ -11,7 +11,7 @@
                     "error": {
                         "properties": {
                             "data": {
-                                "description": "old data containing details of the error"
+                                "description": "Optional data containing details of the error"
                             },
                             "message": {
                                 "type": "string",
@@ -980,6 +980,86 @@
                     }
                 },
                 "required": ["status"],
+                "type": "object"
+            },
+            "Pick_CatalogField.name-or-tableName_": {
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "tableName": {
+                        "type": "string"
+                    }
+                },
+                "required": ["name", "tableName"],
+                "type": "object",
+                "description": "From T, pick a set of properties whose keys are in the union K"
+            },
+            "CatalogMetricsTreeNode": {
+                "$ref": "#/components/schemas/Pick_CatalogField.name-or-tableName_"
+            },
+            "CatalogMetricsTreeEdge": {
+                "properties": {
+                    "projectUuid": {
+                        "type": "string"
+                    },
+                    "createdByUserUuid": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "target": {
+                        "$ref": "#/components/schemas/CatalogMetricsTreeNode"
+                    },
+                    "source": {
+                        "$ref": "#/components/schemas/CatalogMetricsTreeNode"
+                    }
+                },
+                "required": [
+                    "projectUuid",
+                    "createdByUserUuid",
+                    "createdAt",
+                    "target",
+                    "source"
+                ],
+                "type": "object"
+            },
+            "ApiGetMetricsTree": {
+                "properties": {
+                    "results": {
+                        "properties": {
+                            "edges": {
+                                "items": {
+                                    "$ref": "#/components/schemas/CatalogMetricsTreeEdge"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "required": ["edges"],
+                        "type": "object"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": ["ok"],
+                        "nullable": false
+                    }
+                },
+                "required": ["results", "status"],
+                "type": "object"
+            },
+            "ApiMetricsTreeEdgePayload": {
+                "properties": {
+                    "targetMetricId": {
+                        "type": "string"
+                    },
+                    "sourceMetricId": {
+                        "type": "string"
+                    }
+                },
+                "required": ["targetMetricId", "sourceMetricId"],
                 "type": "object"
             },
             "ApiCreateComment": {
@@ -3022,6 +3102,9 @@
                     "slug": {
                         "type": "string"
                     },
+                    "tableName": {
+                        "type": "string"
+                    },
                     "updatedAt": {
                         "type": "string",
                         "format": "date-time"
@@ -3033,9 +3116,6 @@
                         "type": "number",
                         "format": "double",
                         "nullable": true
-                    },
-                    "tableName": {
-                        "type": "string"
                     },
                     "metricQuery": {
                         "$ref": "#/components/schemas/MetricQuery"
@@ -3085,9 +3165,9 @@
                     "dashboardUuid",
                     "dashboardName",
                     "slug",
+                    "tableName",
                     "updatedAt",
                     "pinnedListOrder",
-                    "tableName",
                     "metricQuery",
                     "chartConfig",
                     "tableConfig",
@@ -7203,12 +7283,12 @@
                     "slug": {
                         "type": "string"
                     },
+                    "tableName": {
+                        "type": "string"
+                    },
                     "updatedAt": {
                         "type": "string",
                         "format": "date-time"
-                    },
-                    "tableName": {
-                        "type": "string"
                     },
                     "metricQuery": {
                         "$ref": "#/components/schemas/MetricQuery"
@@ -7233,8 +7313,8 @@
                     "name",
                     "dashboardUuid",
                     "slug",
-                    "updatedAt",
                     "tableName",
+                    "updatedAt",
                     "metricQuery",
                     "chartConfig",
                     "tableConfig"
@@ -7453,12 +7533,12 @@
                     "slug": {
                         "type": "string"
                     },
+                    "tableName": {
+                        "type": "string"
+                    },
                     "updatedAt": {
                         "type": "string",
                         "format": "date-time"
-                    },
-                    "tableName": {
-                        "type": "string"
                     },
                     "tableConfig": {
                         "properties": {
@@ -7488,8 +7568,8 @@
                     "name",
                     "dashboardUuid",
                     "slug",
-                    "updatedAt",
                     "tableName",
+                    "updatedAt",
                     "tableConfig",
                     "version",
                     "spaceSlug"
@@ -11734,7 +11814,7 @@
     },
     "info": {
         "title": "Lightdash API",
-        "version": "0.1391.0",
+        "version": "0.1395.0",
         "description": "Open API documentation for all public Lightdash API endpoints.  # Authentication Before you get started, you might need to create a Personal Access Token to authenticate via the API. You can create a token by following this guide: https://docs.lightdash.com/references/personal_tokens\n",
         "license": {
             "name": "MIT"
@@ -12335,6 +12415,160 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/v1/projects/{projectUuid}/dataCatalog/metrics/tree": {
+            "get": {
+                "operationId": "getMetricsTree",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiGetMetricsTree"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorPayload"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Catalog"],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "projectUuid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "metricIds",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "/api/v1/projects/{projectUuid}/dataCatalog/metrics/tree/edges": {
+            "post": {
+                "operationId": "createMetricsTreeEdge",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiSuccessEmpty"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorPayload"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Catalog"],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "projectUuid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ApiMetricsTreeEdgePayload"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/projects/{projectUuid}/dataCatalog/metrics/tree/edges/{sourceMetricId}/{targetMetricId}": {
+            "delete": {
+                "operationId": "deleteMetricsTreeEdge",
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiSuccessEmpty"
+                                }
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ApiErrorPayload"
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["Catalog"],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "projectUuid",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "sourceMetricId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "targetMetricId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
             }
         },
         "/api/v1/comments/dashboards/{dashboardUuid}/{dashboardTileUuid}": {
