@@ -70,6 +70,8 @@ For examples and command-specific options, click through the command in the tabl
 | [`generate`](#lightdash-generate)                     | Generates or updates schema.yml file(s) for the selected model(s)               |
 | [`generate-exposures`](#lightdash-generate-exposures) | [Experimental command] Generates a .yml file for Lightdash exposures            |
 | [`dbt run`](#lightdash-dbt-run)                       | Executes dbt run, then `lightdash generate` to add/update `schema.yml` files    |
+| [`download`](#lightdash-download)                     | Downloads all charts and dashboards from your Lightdash project as code         |
+| [`upload`](#lightdash-upload)                         | Uploads all updates to charts and dashboards as code to your Lightdash project  |
 
 ---
 
@@ -403,6 +405,34 @@ Run a single model and create or update its `schema.yml` file:
 
 ```bash
 lightdash dbt run --select mymodel
+```
+
+### `lightdash download`
+
+Downloads all charts and dashboards from your Lightdash project as code. A `lightdash` directory is created in your dbt project and all of the charts and dashboards are written there as .yml files. 
+
+You can make changes to the code and upload these changes back to your Lightdash project. Content that's been downloaded as code can still be managed in the Lightdash UI. 
+
+**Examples:**
+
+Download all charts and dashboards from your project. 
+
+```bash
+lightdash download
+```
+
+### `lightdash upload`
+
+Uploads all charts and dashboards from the `lightdash/` directory in your dbt project to your Lightdash project. 
+
+`lightdash upload` will update or create all of the charts or dashboards in the Lightdash application. If there have been changes made to a chart or dashboard in the application that is being uploaded from code, `lightdash upload` will overwrite the changes.
+
+**Examples:**
+
+Upload all charts and dashboards in code from your `lightdash/` directory to your Lightdash project. 
+
+```bash
+lightdash upload
 ```
 
 ## dbt options
