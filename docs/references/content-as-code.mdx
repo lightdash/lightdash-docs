@@ -15,9 +15,9 @@ For example:
 - I run `lightdash download` again 
 - The changes I made to `emea-revenue-per-month.yml` will be overwritten by the latest chart version downloaded from the Lightdash application 
 
-## `lightdash upload` updates or creates any content as code to your project
+## `lightdash upload` updates any content as code to your project
 
-From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload any updated charts and dashboards saved as .yml in your `lightdash/` directory in your dbt project to the Lightdash application. 
+From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload any updated charts and dashboards saved as .yml in your `lightdash/` directory in your dbt project to the Lightdash application. To upload new charts that you've created as code to your Lightdash project, you need to run `lightdash upload --force`
 
 #### Only content as code that you've made changes to will be uploaded 
 
@@ -66,10 +66,8 @@ To do this, you'll need to:
 - In the CLI, run `lightdash download` to download all of the content as code from the project
 - Navigate to your new dbt project that you want to connect to Lightdash. 
 - Copy-paste over the `lightdash/` directory inside your new dbt project with all of the content as code from your template project (or, only copy over the content that you want to use in your new project)
-- In your new `lightdash/` directory, if your **table names** or **column names** changed between your dbt projects, you'll need to update these in your content's .yml files. If only the schema or database names changed between projects, you do not need to update anything. 
-  - E.g. in my dbt project `Sales reporting Walmart`, I have a table like `global-database.walmart.sales_daily`. I create a new dbt project called `Sales reporting Costco` with a table like `global-database.costco.sales_daily`. In this example, only the schema changed between the two projects, so any content in Lightdash from `Sales reporting Walmart` will also work if I copy-paste it into `Sales reporting Costco`.
 - Once you're happy with your content, you're going to run `lightdash config set-project` and select your new Lightdash project from the list of projects
-- Then, you'll run `lightdash upload` to upload all of the content as code you've added in your `lightdash/` directory to your new Lightdash project
+- Then, you'll run `lightdash upload --force` to upload all of the content as code you've added in your `lightdash/` directory to your new Lightdash project
 
 ### Adding content to an existing project from a Lightdash template
 
@@ -78,7 +76,5 @@ Sometimes, if you're managing multiple dbt projects with similar models, you wan
 - You want to create a Lightdash project that only contains all of the content that you want to share across your projects
 - From your CLI, you can run `lightdash download` to download all of this content as code 
 - You can then copy-paste the .yml files that get written across to any of the other dbt projects you have where you want to reuse the same charts and dashboards. 
-- In the dbt projects where you're copying the chart and dashboard .yml files over to, if your **table names** or **column names** change between your dbt projects, you'll need to update these in your content's .yml files. If only the schema or database names changed between projects, you do not need to update anything. 
-  - E.g. in my dbt project `Sales reporting Walmart`, I have a table like `global-database.walmart.sales_daily`. I create a new dbt project called `Sales reporting Costco` with a table like `global-database.costco.sales_daily`. In this example, only the schema changed between the two projects, so any content in Lightdash from `Sales reporting Walmart` will also work if I copy-paste it into `Sales reporting Costco`.
 - Once you've copied over any content that you wanted to manage across projects, from the CLI, you should run `lightdash config set-project` and select the project where you've added these new charts/dashboards as code to. 
 - Then, you should run `lightdash upload` to upload all of the new content as code.
