@@ -9,8 +9,10 @@ From the [Lightdash CLI](/references/lightdash-cli), you can use the command `li
 #### Running `lightdash download` will overwrite any changes you have locally
 
 For example:
-- I run `lightdash download` and make changes to a chart `emea-revenue-per-month.yml`
-- I run `lightdash download` again (without uploading my changes)
+- I run `lightdash download` and one of the charts that is downloaded is `emea-revenue-per-month.yml`
+- I make some changes to the `emea-revenue-per-month.yml` file and save them
+- I **do not** upload my changes, they are just saved locally
+- I run `lightdash download` again 
 - The changes I made to `emea-revenue-per-month.yml` will be overwritten by the latest chart version downloaded from the Lightdash application
 
 #### Content that's been downloaded as code can still be updated in the Lightdash application
