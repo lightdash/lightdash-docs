@@ -21,5 +21,25 @@ For example:
 - Jake updates the `Total new clients` chart in the `Stellar Marketing` project in the Lightdash application
 - The `Total new clients` chart that Priyanka has as code will be the old version of the chart, before Jake updated it. 
 - Priyanka makes changes to `Total new clients` then uploads her changes and overwrites the changes that Jake made in the Lightdash application. 
+- Both Jake and Priyanka can update the same chart as code, or in the Lightdash application. 
 
-## `lightdash upload` uploads any changes from code to your project
+## `lightdash upload` updates or creates any content as code to your project
+
+From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload all of the charts and dashboards saved as .yml in your `lightdash/` directory in your dbt project to the Lightdash application. 
+
+#### Only content that you've made changes to as code will be uploaded 
+
+For example: 
+- I have a chart that I've downloaded as code called `total-sales-worldwide.yml` in my `lightdash/` directory
+- I haven't made any changes to the chart
+- I run `lightdash upload`
+- `total-sales-worldwide.yml` does not get uploaded because there were no changes
+
+Here's another example:
+- Katie has a chart that she's downloaded as code called `total-sales-worldwide.yml` in her `lightdash/` directory
+- She doesn't make any changes to the chart as code
+- Javi opens the same chart `Total sales worldwide` in the Lightdash application, makes some changes, and saves them
+- Now, Katie's `total-sales-worldwide.yml` and the `Total sales worldwide` chart in the application are different.
+- Katie runs `lightdash upload`
+- Katie's `total-sales-worldwide.yml` does **not** get uploaded because she made no changes to the chart as code
+- Javi's changes to the `Total sales worldwide` chart that he made in the Lightdash application are **not** overwritten (the version he created is what we see in the Lightdash application)
