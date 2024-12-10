@@ -1,3 +1,5 @@
+import DownloadContent from './assets/donwload-content.jpg';
+
 # Content as code
 
 You can download your charts and dashboards as code, make changes, then upload your changes back to your Lightdash project using the CLI. Content as code is also useful for creating new Lightdash projects where you want the content to be copied from an existing project and added to your new project.
@@ -7,6 +9,13 @@ You can download your charts and dashboards as code, make changes, then upload y
 From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash download` to download all of the charts and dashboards from your Lightdash project as code. All of the charts and dashboards will be written as .yml files to a `lightdash` directory wherever you're running the command.
 
 E.g. if you're running this command inside your dbt directory (eg: `/home/javi/dbt`) then it will create a folder (`/home/javi/dbt/lightdash`). If you're running this command in `/home/javi/documents` it will create the folder in `/home/javi/documents/lightdash`.
+
+<img
+  src={DownloadContent}
+  width="1703"
+  height="475"
+  style={{ display: 'block', margin: '0 auto 20px auto' }}
+/>
 
 #### Running `lightdash download` will overwrite any changes you have locally
 
@@ -19,7 +28,7 @@ For example:
 
 ## `lightdash upload` updates any content as code to your project
 
-From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload any updated charts and dashboards saved as .yml in your `lightdash/` directory in your dbt project to the Lightdash application. To upload new charts that you've created as code to your Lightdash project, you need to run `lightdash upload --force`
+From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload any changes you've made to your charts or dashboards as code. To upload new charts that you've created as code to your Lightdash project, you need to run `lightdash upload --force`
 
 #### Only content as code that you've made changes to will be uploaded 
 
@@ -29,7 +38,7 @@ For example:
 - I run `lightdash upload`
 - `total-sales-worldwide.yml` is the only file that gets uploaded because it's the only file that I made changes to
 
-Here's another example:
+For example:
 - Katie has a chart that she's downloaded as code called `total-sales-worldwide.yml` in her `lightdash/` directory
 - She doesn't make any changes to the chart as code
 - Javi opens the same chart, `Total sales worldwide`, in the Lightdash application, makes some changes, and saves them
@@ -37,13 +46,6 @@ Here's another example:
 - Katie runs `lightdash upload`
 - Katie's `total-sales-worldwide.yml` does **not** get uploaded because she made no changes to the chart as code
 - Javi's changes to the `Total sales worldwide` chart that he made in the Lightdash application are **not** overwritten (the version he created is what we see in the Lightdash application)
-
-Here's another example:
-- João runs `lightdash download` and downloads all of the charts from his Lightdash project
-- Jose opens the same Lightdash project in the Lightdash application and creates a new chart called `Weekly customer support metrics`
-- João doesn't have this new chart as code because he hasn't re-run `lightdash download` since the chart was created
-- João makes some changes to a different chart, then runs `lightdash upload`
-- The chart that Jose created called `Weekly customer support metrics` stays in the Lightdash project, unchanged. It isn't deleted just because it doesn't exist in João's charts as code when he runs `lightdash upload`.
 
 #### Content that's been downloaded as code can still be updated in the Lightdash application
 
