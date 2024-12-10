@@ -17,15 +17,15 @@ For example:
 
 ## `lightdash upload` updates or creates any content as code to your project
 
-From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload all of the charts and dashboards saved as .yml in your `lightdash/` directory in your dbt project to the Lightdash application. 
+From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload any updated charts and dashboards saved as .yml in your `lightdash/` directory in your dbt project to the Lightdash application. 
 
 #### Only content as code that you've made changes to will be uploaded 
 
 For example: 
 - I have a chart that I've downloaded as code called `total-sales-worldwide.yml` in my `lightdash/` directory
-- I haven't made any changes to the chart
+- I only make changes to that chart's .yml
 - I run `lightdash upload`
-- `total-sales-worldwide.yml` does not get uploaded because there were no changes
+- `total-sales-worldwide.yml` is the only file that gets uploaded because it's the only file that I made changes to
 
 Here's another example:
 - Katie has a chart that she's downloaded as code called `total-sales-worldwide.yml` in her `lightdash/` directory
