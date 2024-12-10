@@ -4,7 +4,9 @@ You can download your charts and dashboards as code, make changes, then upload y
 
 ## `lightdash download` downloads content as code
 
-From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash download` to download all of the charts and dashboards from your Lightdash project as code. All of the charts and dashboards will be written as .yml files to a `lightdash` directory inside of your dbt project. 
+From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash download` to download all of the charts and dashboards from your Lightdash project as code. All of the charts and dashboards will be written as .yml files to a `lightdash` directory wherever you're running the command.
+
+E.g. if you're running this command inside your dbt directory (eg: `/home/javi/dbt`) then it will create a folder (`/home/javi/dbt/lightdash`). If you're running this command in `/home/javi/documents` it will create the folder in `/home/javi/documents/lightdash`.
 
 #### Running `lightdash download` will overwrite any changes you have locally
 

@@ -409,7 +409,9 @@ lightdash dbt run --select mymodel
 
 ### `lightdash download`
 
-Downloads all charts and dashboards from your Lightdash project as code. A `lightdash` directory is created in your dbt project and all of the charts and dashboards are written there as .yml files. 
+Downloads all charts and dashboards from your Lightdash project as code. A `lightdash` directory is created in your working directory and all of the charts and dashboards are written there as .yml files. 
+
+E.g. if you're running this command inside your dbt directory (eg: `/home/javi/dbt`) then it will create a folder (`/home/javi/dbt/lightdash`). 
 
 You can make changes to the code and upload these changes back to your Lightdash project. Content that's been downloaded as code can still be managed in the Lightdash UI. 
 
