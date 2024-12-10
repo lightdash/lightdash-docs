@@ -207,6 +207,11 @@ module.exports = {
                                 },
                             ]
                         },
+                        {
+                            type: 'doc',
+                            id: 'references/content-as-code',
+                            label: 'Content as Code',
+                        },
                         'references/sql-variables',
                     ],
                 },
