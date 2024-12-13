@@ -144,3 +144,11 @@ So if one of your business users explores a metric with a default time grain of 
 **c. Can I pull through other metadata from my .yml files?**
 
 Not yet, but soon you'll be able to manage metadata directly in the UI and sync it back to dbt.
+
+## Roles and permissions
+
+| **Action**                    | **Project Admin** | **Project Developer** | **Project Editor** | **Project Interactive Viewer** | **Project Viewer** |
+| ----------------------------- | ----------------- | --------------------- | ------------------ | ------------------------------ | ------------------ |
+| Browse the ‘Metrics catalog’  | ✅                | ✅                    | ✅                 | ✅                             | ❌                 |
+| Add/edit /delete ‘Categories’ | ✅                | ✅                    | ✅                 | ❌                             | ❌                 |
+| Open the ‘Metrics Explorer’   | ✅                | ✅                    | ✅                 | ✅                             | ❌                 |
