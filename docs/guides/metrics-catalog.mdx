@@ -1,41 +1,57 @@
+import BrowsingTheCatalog from "./assets/browsing-the-catalog.webp";
+import ExploringAMetric from "./assets/exploring-a-metric.webp";
+
 # Metrics Catalog
 
-:::note
-🏗️ The metrics catalog is currently work in progress. Some of the functionality might be subject to change.
+:::info
+🏗️ The Metrics Catalog is currently in beta. We're actively testing and improving it—some of the functionality might be subject to change.
 :::
 
-You can use the metrics catalog to **search, filter, and explore metrics** across your project.
-Each user has their own view of the metrics catalog, depending on the dimensions and metrics they have access to.
+The Metrics Catalog simplifies data exploration, making it easy for business users to focus on metrics without dealing with complex tables or time dimensions.
 
-## Current functionality
+## Browsing the catalog
 
-Currently, you're able to:
+Browse all the project metrics you have access to (based on permissions and user-attributes) in the **Metrics Catalog**.
 
-- **View** all metrics you have access to and **search** them
-- **Customize the icon** for a metric
-- **Categorize metrics** using tags so you can segment them and find them easier
-- **Filter metrics** by table, dimension, and metric type
-- **Explore** metrics
+<img
+  src={BrowsingTheCatalog}
+  width="1240"
+  height="580"
+  style={{ display: "block", margin: "0 auto 20px auto" }}
+/>
+
+1. **Search**: Easily find metrics by their names or .yml descriptions using the searchbar.
+2. **View .yml descriptions**: Click on any description to expand and view the full content, including rendered Markdown.
+3. **Categories**: Use categories to streamline your metrics and KPIs. Filter metrics by category and add new ones directly in the UI. **_Users with editor permissions and above_** can click on any category cell to edit, rename, change its color, or delete it.
+4. **View popularity**: Discover a metric’s popularity and see where it’s being used. Click to explore a complete list of charts which use the metric. Metrics are sorted by default to highlight the most used ones first.
+5. **Explore**: **_Interactive viewers and above_** can dive deeper by clicking _Explore_ to visualize the metric in a chart format.
 
 ## Exploring a metric
 
-You are able to explore a metric by clicking on it from the metrics catalog. This will open a new tab with the Explore page where you can run queries using the metric.
+Visualize your metrics in the **Metrics Explorer**.
 
-### Serving valuable exploration experiences to your business users
+<img
+  src={ExploringAMetric}
+  width="1240"
+  height="580"
+  style={{ display: "block", margin: "0 auto 20px auto" }}
+/>
 
-You can configure the explore page to have a default time period, filters, and metrics. This allows you to serve an accurate exploration experience to your business users.
+1. **Plot over time**: View your selected metric plotted over a time dimension. You can adjust this dimension or set a default time dimension in your `.yml` to simplify the process for users. [See how](#configuring-default-time-settings-in-yml)
+2. **Filter by date**: Use the date picker with convenient presets for quick selection. [See how default presets work based on the granularity](#faq)
+3. **Adjust the time granularity**: Refine your view by choosing the desired level of date granularity.
+4. **Compare to:**
+   - **'This time last year'**: Compare the selected time period to the same period last year
+   - **'Another metric':** Compare to any other metric in the project **that has a default time dimension specified in the `.yml`**. [See how](#configuring-default-time-settings-in-yml)
+5. **Segment-by**: Break down the metric by a dimension(that isn't a time, or a numeric dimension) in your dataset.
 
-### 1. Check the prerequisites
+## Configuring default time settings in .yml
 
-You have to have permissions to make changes to your Lightdash .yml files so you can set a default time dimension on a table level. This will be used to prefill the time dimension in the explore view.
+To pre-select a time dimension in the explore view, you need to define default dimensions in your Lightdash `.yml` files.
 
-### 2. Set a default time dimension on a table level in your Lightdash .yml file
+#### Set a default time dimension on a table level in your Lightdash .yml file
 
-##### Example
-
-You want to set a default time dimension on the events table so that every time you explore a metric from the events table, the time dimension `event_date`, with the grain `DAY` within the last 30 days, is prefilled.
-
-The following is an example of how your events.yml file could look like:
+1. Create or modify your table configuration in the .yml file. For example, to set a default time dimension on the events table:
 
 ```yml
 version: 2
@@ -43,15 +59,15 @@ models:
   - name: events
     columns:
       - name: event_date
-        description: 'Event date'
+        description: "Event date"
         meta:
           dimension:
-            label: 'Event date'
+            label: "Event date"
             type: date
             time_intervals:
               - DAY
       - name: event
-        description: 'Event'
+        description: "Event"
         meta:
           dimension:
             type: string
@@ -60,9 +76,9 @@ models:
               type: count
 ```
 
-And now you can set a default time dimension on the table level, like so:
+2. Add the default time dimension at the table level:
 
-```
+```yml
 version: 2
 models:
   - name: events
@@ -73,24 +89,50 @@ models:
     columns:...
 ```
 
-Now, you can compile your project and go to the metrics catalog. Metrics with that default time set will be explored with over the event date day granularity in the last 30 days.
+3. [Compile your project](/references/dbt-projects.mdx)
+4. Navigate to the metrics catalog
+5. Open any metrics from the events table
+6. All metrics with that default time set will be plotted against the `event date` with day granularity `in the last 30 days`
 
-#### Once you have set a default time dimension on a table, compile your project.
+#### Set a default time dimension on a metric level in your Lightdash .yml file
 
-This will introduce the default time dimension in the metrics catalog so every time you explore a metric from that table, the time dimension will be prefilled with the default time filters.
-(See [how to compile your project](/references/dbt-projects.mdx) for more information)
+This will override the time dimension defined on the table level.
 
-#### Go to the metrics catalog and **Explore a metric** from the table/model you have set a default time dimension on.
+1. Modify your existing table configuration to add a metric-level default time dimension:
 
-You will be redirected to the explore view with the time dimension prefilled with the default time filters.
+```yml
+version: 2
+models:
+  - name: events
+    meta:
+      default_time_dimension:
+        field: event_date
+        interval: DAY
+    columns:
+      - name: event
+        description: "Event"
+        meta:
+          metrics:
+            count:
+              type: count
+              # This will override the table level default time dimension
+              default_time_dimension:
+                field: event_date
+                interval: MONTH
+```
 
-### 🙋 Questions you might have
+2. [Compile your project](/references/dbt-projects.mdx)
+3. Navigate to the metrics catalog
+4. Explore the Events' count metric
+5. The metric will be plotted against the `event date` with **month** granularity, instead of the default **day** granularity applied to the table
+
+## FAQ
 
 **a. What time intervals are supported?**
 
-- Currently, we only support: DAY, WEEK, MONTH, YEAR
+Currently, we only support: DAY, WEEK, MONTH, YEAR
 
-**b. What prefilled filters are applied?**
+**b. What pre-filled filters are applied?**
 
 - Time grain Year -> past 5 years
 - Time grain Month -> past 12 months
@@ -99,10 +141,14 @@ You will be redirected to the explore view with the time dimension prefilled wit
 
 So if one of your business users explores a metric with a default time grain of DAY, metrics will be shown for the past 30 days with granularity of days with the default time dimension prefilled.
 
-**c. Can I change the prefilled filters?**
+**c. Can I pull through other metadata from my .yml files?**
 
-No, not yet.
+Not yet, but soon you'll be able to manage metadata directly in the UI and sync it back to dbt.
 
-**d. Can I set a default time dimension on a column level?**
+## Roles and permissions
 
-No, not yet.
+| **Action**                    | **Project Admin** | **Project Developer** | **Project Editor** | **Project Interactive Viewer** | **Project Viewer** |
+| ----------------------------- | ----------------- | --------------------- | ------------------ | ------------------------------ | ------------------ |
+| Browse the ‘Metrics catalog’  | ✅                | ✅                    | ✅                 | ✅                             | ✅                 |
+| Add/edit /delete ‘Categories’ | ✅                | ✅                    | ✅                 | ❌                             | ❌                 |
+| Open the ‘Metrics Explorer’   | ✅                | ✅                    | ✅                 | ✅                             | ❌                 |
