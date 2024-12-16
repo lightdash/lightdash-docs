@@ -1,13 +1,19 @@
 import BrowsingTheCatalog from "./assets/browsing-the-catalog.webp";
 import ExploringAMetric from "./assets/exploring-a-metric.webp";
 
-# Metrics Catalog
+# Lightdash Spotlight
 
 :::info
-🏗️ The Metrics Catalog is currently in beta. We're actively testing and improving it—some of the functionality might be subject to change.
+🏗️ The Spotlight features are currently in beta. We're actively testing and improving them — some of the functionality might be subject to change.
 :::
 
-The Metrics Catalog simplifies data exploration, making it easy for business users to focus on metrics without dealing with complex tables or time dimensions.
+Spotlight is a suite of features designed to put Metrics front and center. They simplify data exploration, making it easy for business users to focus on metrics without dealing with complex tables or time dimensions.
+
+## Getting Started
+
+Existing Lightdash users don’t need to do anything to get started! Spotlight features use your existing semantic layer and metrics definitions, so you can get started today.
+
+Head to the ‘Metrics Catalog’ under the ‘Browse’ menu in the navigation bar.
 
 ## Browsing the catalog
 
@@ -37,17 +43,19 @@ Visualize your metrics in the **Metrics Explorer**.
   style={{ display: "block", margin: "0 auto 20px auto" }}
 />
 
-1. **Plot over time**: View your selected metric plotted over a time dimension. You can adjust this dimension or set a default time dimension in your `.yml` to simplify the process for users. [See how](#configuring-default-time-settings-in-yml)
+1. **Plot over time**: View your selected metric plotted over a time dimension as a line chart. You can adjust this dimension or set a default time dimension in your `.yml` to simplify the process for users. [See how](#configuring-default-time-settings-in-yml)
 2. **Filter by date**: Use the date picker with convenient presets for quick selection. [See how default presets work based on the granularity](#faq)
 3. **Adjust the time granularity**: Refine your view by choosing the desired level of date granularity.
 4. **Compare to:**
    - **'This time last year'**: Compare the selected time period to the same period last year
-   - **'Another metric':** Compare to any other metric in the project **that has a default time dimension specified in the `.yml`**. [See how](#configuring-default-time-settings-in-yml)
+   - **'Another metric':** Compare to any other metric in the project **that has a default time dimension specified in the `.yml`**. This includes joins [See how](#configuring-default-time-settings-in-yml)
 5. **Segment-by**: Break down the metric by a dimension(that isn't a time, or a numeric dimension) in your dataset.
 
 ## Configuring default time settings in .yml
 
-To pre-select a time dimension in the explore view, you need to define default dimensions in your Lightdash `.yml` files.
+We recommend setting up default time fields to make it easier for your business users and save them time.
+
+To pre-select a time field in the explore view, simply define the default settings in your Lightdash `.yml` files.
 
 #### Set a default time dimension on a table level in your Lightdash .yml file
 
@@ -126,7 +134,7 @@ models:
 4. Explore the Events' count metric
 5. The metric will be plotted against the `event date` with **month** granularity, instead of the default **day** granularity applied to the table
 
-## FAQ
+## FAQs
 
 **a. What time intervals are supported?**
 
