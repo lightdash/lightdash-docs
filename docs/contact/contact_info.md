@@ -23,7 +23,7 @@ Well, that's nice 😊
 
 There are four things you can do to keep up with all things Lightdash:
 
-1. Join the [Lightdash Community Slack](https://join.slack.com/t/lightdash-community/shared_invite/zt-2ehqnrvqt-LbCq7cUSFHAzEj_wMuxg4A).
+1. Join the [Lightdash Community Slack](https://join.slack.com/t/lightdash-community/shared_invite/zt-2wgtavou8-VRhwXI~QbjCAHQs0WBac3w).
 
 2. Star our [GitHub repo](https://github.com/lightdash/lightdash)
 
@@ -45,7 +45,7 @@ First, [check out our FAQs](https://github.com/lightdash/lightdash/discussions/c
 
 If you can't find your answer there, the best ways to reach us are:
 
-1. Post your question [in our Slack Community](https://join.slack.com/t/lightdash-community/shared_invite/zt-2ehqnrvqt-LbCq7cUSFHAzEj_wMuxg4A)
+1. Post your question [in our Slack Community](https://join.slack.com/t/lightdash-community/shared_invite/zt-2wgtavou8-VRhwXI~QbjCAHQs0WBac3w)
 2. Send us a message in the Lightdash app (click on the question mark icon in the navigation bar)
 3. Post a [question in our Q&A](https://github.com/lightdash/lightdash/discussions/categories/q-a)
 4. [Create a new GitHub issue](https://github.com/lightdash/lightdash/issues) (if it's a bug)
