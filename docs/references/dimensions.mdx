@@ -367,8 +367,23 @@ This example would look like this in the sidebar:
 
 ## URLs
 
-Lightdash users can interact with dimension values by clicking on them. By adding custom `urls` you can configure
-the actions available to your users. Like linking to external tools, or taking actions in other tools.
+Lightdash users can interact with dimension values by clicking on them.
+If you're already storing URLs in your models, you can create hyperlinks to those URLs in Lightdash, like so:
+
+```yaml
+columns:
+  - name: candidate_profile_url
+    label: URL of the candidate profile
+    meta:
+      dimension:
+        urls:
+          - label: Open in CRM
+            url: ${ value.raw }
+```
+### How to add custom URLs to dimensions
+
+By adding custom `urls` you can configure the actions available to your users. Like linking to external tools, or taking actions in other tools.
+
 
 <img
   src={ClickableDimension}
