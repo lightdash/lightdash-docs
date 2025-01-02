@@ -235,3 +235,48 @@ This feature can be accessed by clicking on the Print icon located in the upper 
 
 Upon selecting the Print icon, a dialog box will emerge, presenting you with several print options.
 Within this dialog, you have the option to choose "Export as PDF" as your desired output format.
+
+
+### Apply additional filters for logged-in users
+
+Lightdash allows you to create customized embedded experiences by applying specific filters to show additional content exclusively for logged-in users. This functionality can be particularly useful when you need to tailor data views based on user attributes, 
+such as ensuring users only see data relevant to their organization.
+
+#### How it works 
+
+1. Define user attributes
+
+When generating the embed URL, specify user attributes such as company_id or any custom attribute that fits your use case.
+
+```
+// Code snippet 
+const data = { 
+  content: {
+        type: 'dashboard',
+        ...
+  },
+  userAttributes: {
+    company_id: '12345',
+  },
+}
+
+```
+
+These attributes can then be used to apply row-level security in your data model.
+
+2.  Set up row-level security
+
+Use the sql_filter functionality in your model to enforce row-level security based on user attributes. More info about row-level security can be found [here](https://docs.lightdash.com/references/user-attributes/#row-filtering-with-sql_filter).
+
+```
+models:
+  - name: your_model_name
+    sql_filter: company_id = '{{user_attributes.company_id}}'
+```
+
+3. User segmentation
+
+- Internal Users: Logged-in users interacting with Lightdash directly will see rows filtered based on the user attributes assigned to them in the Lightdash UI.
+
+- External (Embed) Users: External users do not log in. Instead, their user attributes are dynamically set when you generate the URL. By embedding a URL with a specific company_id, you ensure the sql_filter is applied appropriately.
+
