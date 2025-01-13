@@ -4,6 +4,24 @@ The Lightdash CLI is the recommended way to develop your Lightdash project. It m
 
 ---
 
+## Dependencies
+
+The Lightdash CLI requires the [dbt core](https://docs.getdbt.com/docs/core/installation-overview) or the [dbt cloud CLI](https://docs.getdbt.com/docs/cloud/cloud-cli-installation) to be installed and available under the `dbt` command.
+
+### Known limitations when using **dbt cloud CLI**
+
+#### Warehouse credentials dependency for some commands
+
+Affected commands: `lightdash generate`, `lightdash preview` and `lightdash start-preview`
+
+These commands rely on the warehouse credentials from the active project, as the dbt Cloud CLI does not expose credentials directly. Ensure the project's credentials have access to all development and staging schemas for a seamless experience.
+
+#### Empty warehouse credentials for new projects
+
+Affected commands:  `lightdash deploy --create`
+
+When using this command to create a new project that is not a preview, the warehouse credentials will not be populated automatically. Users must update the warehouse credentials manually in the project settings page after the project is created.
+
 ## Global options
 
 There are three global options that can be used with any Lightdash CLI command: [version](#version), [help](#help), and [verbose](#verbose).
