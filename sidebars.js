@@ -210,7 +210,7 @@ module.exports = {
                         {
                             type: 'doc',
                             id: 'references/dashboards-as-code',
-                            label: 'Content as Code',
+                            label: 'Dashboards as Code',
                         },
                         'references/sql-variables',
                     ],
