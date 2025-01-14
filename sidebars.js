@@ -209,8 +209,8 @@ module.exports = {
                         },
                         {
                             type: 'doc',
-                            id: 'references/content-as-code',
-                            label: 'Content as Code',
+                            id: 'references/dashboards-as-code',
+                            label: 'Dashboards as Code',
                         },
                         'references/sql-variables',
                     ],
