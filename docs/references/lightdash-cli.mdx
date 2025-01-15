@@ -36,6 +36,13 @@ Ignores the preceding command and shows the installed CLI version. Usually it's 
 lightdash --version
 ```
 
+If you need to upgrade your version of the Lightdash cli, run the following in your terminal:
+
+```bash
+npm install -g @lightdash/cli
+lightdash --version
+```
+
 ### Help
 
 `--help` or `-h`
@@ -439,6 +446,10 @@ You can make changes to the code and upload these changes back to your Lightdash
   - select specific charts as code to download from your project. Use the chart SLUG, UUID or URL to specify the chart.
 - `--dashboards` or `-d` 
   - select specific dashboards as code to download from your project. This will also download all charts in the dashboard as code. Use the dashboard SLUG, UUID or URL to specify the dashboard.
+- `--path` or `-p`
+  - specify a custom path to a directory where you want the downloaded files to be written to. You can use the full path, or a relative path to a directory.
+- `--project <project uuid>`
+  - download all charts and dashboards from a specific project. You can find the project UUID for a project from a Lightdash URL. E.g. here, the project UUID is `123-project-uuid` `https://app.lightdash.cloud/projects/123-project-uuid/`
 
 **Examples:**
 
@@ -452,6 +463,26 @@ Download a specific dashboard from your Lightdash project.
 
 ```bash
 lightdash upload -d https://app.lightdash.cloud/my-dashboard-url
+```
+
+Download all content from a project to the directory `/Users/katiehindson/lightdash/lightdash-analytics/`
+
+```bash
+lightdash download -p /Users/katiehindson/lightdash/lightdash-analytics/
+```
+
+This will create: `/Users/katiehindson/lightdash/lightdash-analytics/charts/` and `/Users/katiehindson/lightdash/lightdash-analytics/dashboards` and save the content to these new folders. 
+
+You can also use relative paths like:
+
+```bash
+lightdash download -p ../
+```
+
+Download all charts and dashboards from a specific project.
+
+```bash
+lightdash download --project 21eef0b9-5bae-40f3-851e-9554588e71a6
 ```
 
 ### `lightdash upload`
@@ -468,6 +499,10 @@ If there have been changes made to a chart or dashboard in the application that 
   - select specific charts as code to upload back to your project. Use the chart SLUG to specify the chart.
 - `--dashboards` or `-d` 
   - select specific dashboards as code to upload back to your project. Use the dashboard SLUG to specify the dashboard.
+- `--path` or `-p`
+  - specify a custom path to a directory where the files you want to upload are. You can use the full path, or a relative path to a directory.
+- `--project <project uuid>`
+  - upload all charts and dashboards from a specific project. You can find the project UUID for a project from a Lightdash URL. E.g. here, the project UUID is `123-project-uuid` `https://app.lightdash.cloud/projects/123-project-uuid/`
 
 **Examples:**
 
@@ -481,6 +516,26 @@ Upload a specific dashboard to your Lightdash project.
 
 ```bash
 lightdash upload -d my-dashboard-slug
+```
+
+Upload content from the directory `/Users/katiehindson/lightdash/lightdash-analytics/`
+
+```bash
+lightdash upload -p /Users/katiehindson/lightdash/lightdash-analytics/
+```
+
+This will upload all content from: `/Users/katiehindson/lightdash/lightdash-analytics/charts/` and `/Users/katiehindson/lightdash/lightdash-analytics/dashboards` and save the content to these new folders. 
+
+You can also use relative paths like:
+
+```bash
+lightdash upload -p ../
+```
+
+Upload all charts and dashboards from your `lightdash/` directory to a specific project.
+
+```bash
+lightdash upload --project 21eef0b9-5bae-40f3-851e-9554588e71a6
 ```
 
 ## dbt options
