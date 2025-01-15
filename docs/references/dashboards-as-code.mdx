@@ -120,6 +120,32 @@ For example, this command would select two charts to upload:
 lightdash upload -c my-saved-chart-1-slug my-saved-chart-2-slug
 ```
 
+### Use `lightdash upload -p` or `lightdash upload --path` to specify a directory to upload from
+
+By default, `lightdash upload` will upload all items you have saved in the `lightdash` directory in your current working directory. You can customize the directory that you upload from using `lightdash upload -p`. For example:
+
+```bash
+lightdash upload -p /Users/katiehindson/lightdash/lightdash-analytics/
+```
+
+This will upload all content from: `/Users/katiehindson/lightdash/lightdash-analytics/charts/` and `/Users/katiehindson/lightdash/lightdash-analytics/dashboards`. 
+
+You can also use relative paths like:
+
+```bash
+lightdash download -p ../
+```
+
+### Use `lightdash upload --project <project UUID>` to upload your content to a specific project 
+
+Running `lightdash upload` will upload all content to your current set project (set using `lightdash config set-project`). But, you can upload content to another project using `lightdash upload --project my-project-uuid`. For example: 
+
+```bash
+lightdash upload --project 21eef0b9-5bae-40f3-851e-9554588e71a6
+```
+
+You can find a project's UUID from your Lightdash URL. For example, `https://app.lightdash.cloud/projects/123-project-uuid/`. Here, the project UUID here is `123-project-uuid` .
+
 #### Only content as code that you've made changes to will be uploaded 
 
 For example: 
