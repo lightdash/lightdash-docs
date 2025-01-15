@@ -1,5 +1,5 @@
 import BrowsingTheCatalog from "./assets/browsing-the-catalog.webp";
-import ExploringAMetric from "./assets/exploring-a-metric.webp";
+import ExploringAMetric from "./assets/exploring-a-metric.png";
 
 # Spotlight
 
@@ -46,10 +46,12 @@ Visualize your metrics in the **Metrics Explorer**.
 1. **Plot over time**: View your selected metric plotted over a time dimension as a line chart. You can adjust this dimension or set a default time dimension in your `.yml` to simplify the process for users. [See how](#configuring-default-time-settings-in-yml)
 2. **Filter by date**: Use the date picker with convenient presets for quick selection. [See how default presets work based on the granularity](#faq)
 3. **Adjust the time granularity**: Refine your view by choosing the desired level of date granularity.
-4. **Compare to:**
+4. **Filter by a dimension:** Filter your metric by any string or boolean dimension from the same table.
+5. **Segment-by**: Break down the metric by any non-time dimension in your dataset.
+6. **Compare to:**
    - **'This time last year'**: Compare the selected time period to the same period last year
    - **'Another metric':** Compare to any other metric in the project **that has a default time dimension specified in the `.yml`**. This includes joins [See how](#configuring-default-time-settings-in-yml)
-5. **Segment-by**: Break down the metric by a dimension(that isn't a time, or a numeric dimension) in your dataset.
+7. **Drag to zoom:** Click and drag across the chart to highlight the desired time range or data points, then release to zoom in on that segment. Hit ‘Reset Zoom’ to reset chart.
 
 ## Configuring default time settings in .yml
 
@@ -134,6 +136,23 @@ models:
 4. Explore the Events' count metric
 5. The metric will be plotted against the `event date` with **month** granularity, instead of the default **day** granularity applied to the table
 
+## Canvas view (alpha)
+
+The **Canvas View** is a powerful, flexible workspace designed for visualizing and organizing metrics in creative ways. A key use case is creating **Metric Trees** to visualize metric relationships, hierarchies, and dependencies. This visualization enables you to see how metrics impact your KPIs and compare performance over the previous month.
+
+### How to use the ‘Canvas view’ for Metric trees:
+
+1. **Filter your metrics**: Use the 'categories' or 'search' functions to narrow your list of metrics. Canvas view currently works best with fewer than 30 metrics to ensure smooth performance. Need help creating categories? [Learn more here](#browsing-the-catalog).
+2. **Enable Canvas view**: Select **Canvas view** to activate the workspace.
+3. **Add metrics**: Drag your desired metrics from the grey sidebar into the canvas workspace.
+4. **Create connections**: Link metrics by dragging between nodes to build relationships and dependencies. Connected nodes will be saved and visible the next time you filter your metrics down by category.
+5. **Remove nodes**: Select a node and press **Backspace** to delete it.
+6. **Permissions**: Viewers can see trees created in the Canvas View but cannot make edits.
+
+Canvas view is currently in alpha.
+
+Your metric connections are saved, so the next time you filter by a category and switch to canvas view, you'll see your saved connections. However, the placement of any unconnected tiles will not be retained.
+
 ## FAQs
 
 **a. What time intervals are supported?**
@@ -152,6 +171,12 @@ So if one of your business users explores a metric with a default time grain of 
 **c. Can I pull through other metadata from my .yml files?**
 
 Not yet, but soon you'll be able to manage metadata directly in the UI and sync it back to dbt.
+
+**d. Which other metrics can I compare my selected metric by?**
+
+1. **Metrics with defaults in `.yml`:** Metrics with a default time dimension specified in the `.yml` file will always appear.
+2. **Metrics with a single time dimension:** Metrics from tables with only one time dimension will appear as it's assumed to be the most relevant.
+3. **Metrics from joined tables:** Metrics from joined tables that meet the criteria in points 1 and 2 will also appear.
 
 ## Roles and permissions
 
