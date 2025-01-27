@@ -4,7 +4,7 @@ import DownloadContent from './assets/download-content.jpg';
 
 You can download your charts and dashboards as code, make changes, then upload your changes back to your Lightdash project using the CLI. Content as code is also useful for creating new Lightdash projects where you want the content to be copied from an existing project and added to your new project.
 
-## `lightdash download` downloads content as code
+## `lightdash download`
 
 From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash download` to download all of the charts and dashboards from your Lightdash project as code. All of the charts and dashboards will be written as .yml files to a `lightdash` directory wherever you're running the command.
 
@@ -26,7 +26,7 @@ For example:
 - I run `lightdash download` again 
 - The changes I made to `emea-revenue-per-month.yml` will be overwritten by the latest chart version downloaded from the Lightdash application 
 
-### Use `lightdash download -c` or `lightdash download --charts` to select specific charts
+### Select specific items to download
 
 If you only want to download specific charts to manage as code, you can use the chart selector in the download command. 
 
@@ -38,7 +38,7 @@ lightdash download -c https://app.lightdash.cloud/the-url-to-my-saved-chart
 
 You can use the chart's SLUG, UUID, or the URL to the saved chart to select the chart.
 
-### Use `lightdash download -d` or `lightdash download --dashboards` to select specific dashboards
+**Use `lightdash download -d` or `lightdash download --dashboards` to select specific dashboards**
 
 This will download the dashboard and all of the charts in the dashboard as code. For example, if I only wanted to download a specific dashboard as code, I would run the command:
 
@@ -62,7 +62,7 @@ You can combine charts and dashboards selection in a single command. For example
 lightdash download -c https://app.lightdash.cloud/the-url-to-my-first-saved-chart -d https://app.lightdash.cloud/the-url-to-my-dashboard
 ```
 
-### Use `lightdash download -p` or `lightdash download --path` to specify a directory to download to
+### Specify your download path
 
 By default, `lightdash download` will create a new `lightdash` directory in your current working directory and write the content there. You can customize the directory that you write to using `lightdash download -p`. For example:
 
@@ -78,7 +78,7 @@ You can also use relative paths like:
 lightdash download -p ../
 ```
 
-### Use `lightdash download --project <project UUID>` to download all content from a specific project
+### Specify the project to download
 
 Running `lightdash download` will download all content from your current set project (set using `lightdash config set-project`). But, you can download content from another project using `lightdash download --project my-project-uuid`. For example: 
 
@@ -88,11 +88,11 @@ lightdash download --project 21eef0b9-5bae-40f3-851e-9554588e71a6
 
 You can find a project's UUID from your Lightdash URL. For example, `https://app.lightdash.cloud/projects/123-project-uuid/`. Here, the project UUID here is `123-project-uuid` .
 
-## `lightdash upload` updates any content as code to your project
+## `lightdash upload`
 
 From the [Lightdash CLI](/references/lightdash-cli), you can use the command `lightdash upload` to upload any changes you've made to your charts or dashboards as code. To upload new charts that you've created as code to your Lightdash project, you need to run `lightdash upload --force`
 
-### Use `lightdash upload -c` or `lightdash upload --charts` to select specific charts
+### Select specific items to upload
 
 For example, if I only wanted to upload a specific saved chart as code, I would run the command:
 
@@ -102,9 +102,7 @@ lightdash upload -c my-saved-chart-slug
 
 You must specify the chart using the chart's SLUG. 
 
-### Use `lightdash upload -d` or `lightdash upload --dashboards` to select specific dashboards
-
-For example, if I only wanted to upload a specific dashboard as code, I would run the command:
+If I only wanted to upload a specific dashboard as code, I would run the command:
 
 ```bash
 lightdash upload -d my-dashboard-slug
@@ -120,7 +118,7 @@ For example, this command would select two charts to upload:
 lightdash upload -c my-saved-chart-1-slug my-saved-chart-2-slug
 ```
 
-### Use `lightdash upload -p` or `lightdash upload --path` to specify a directory to upload from
+### Specify your upload path
 
 By default, `lightdash upload` will upload all items you have saved in the `lightdash` directory in your current working directory. You can customize the directory that you upload from using `lightdash upload -p`. For example:
 
@@ -136,7 +134,7 @@ You can also use relative paths like:
 lightdash download -p ../
 ```
 
-### Use `lightdash upload --project <project UUID>` to upload your content to a specific project 
+### Specify a project to upload to
 
 Running `lightdash upload` will upload all content to your current set project (set using `lightdash config set-project`). But, you can upload content to another project using `lightdash upload --project my-project-uuid`. For example: 
 
