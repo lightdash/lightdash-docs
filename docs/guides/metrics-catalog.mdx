@@ -1,5 +1,6 @@
 import BrowsingTheCatalog from "./assets/browsing-the-catalog.webp";
 import ExploringAMetric from "./assets/exploring-a-metric.png";
+import VSCodeSchemaValidationExample from "./assets/vscode-schema-validation-example.png";
 
 # Spotlight
 
@@ -53,7 +54,132 @@ Visualize your metrics in the **Metrics Explorer**.
    - **'Another metric':** Compare to any other metric in the project **that has a default time dimension specified in the `.yml`**. This includes joins [See how](#configuring-default-time-settings-in-yml)
 7. **Drag to zoom:** Click and drag across the chart to highlight the desired time range or data points, then release to zoom in on that segment. Hit ‘Reset Zoom’ to reset chart.
 
-## Configuring default time settings in .yml
+## Curating Spotlight for your business users
+
+Spotlight is designed to be a tool for your business users to explore and understand your data.
+
+To make Spotlight more useful for your business users, you can curate the metrics they can see and explore.
+
+To do this, you can:
+
+- Control the visibility of metrics in the catalog
+- Add categories to your metrics
+- Add default time settings to your metrics
+
+All through your Lightdash `.yml` files.
+
+### Configuring global visibility of metrics
+
+You can control the visibility of metrics in the catalog by creating a new file called `lightdash.config.yml` in the root of your dbt project.
+
+```yml
+spotlight:
+  default_visibility: show
+```
+
+:::info
+The default visibility can be set to `show` or `hide`. If you don't set this, the default visibility will be `show`, so all metrics will be visible in the catalog by default (but other settings like user attributes will still apply).
+:::
+
+This will set the default visibility of metrics in the catalog to `show` for all metrics in your project. You can also set this to `hide` if you prefer to hide metrics by default and then override this on a per-model/metric basis.
+
+Now that you've set the default visibility, you can override this on a per-model/metric basis.
+
+```yml
+models:
+  - name: events
+    meta:
+      spotlight:
+        visibility: hide
+```
+
+This will hide the events model from the catalog.
+
+If there are metrics in the events model that you want to make visible, you can override the default visibility for those metrics.
+
+```yml
+models:
+  - name: events
+    meta:
+      spotlight:
+        visibility: hide
+    metrics:
+      - name: event_count
+        type: count
+        spotlight:
+          visibility: show
+```
+
+This will make the `event_count` metric visible in the catalog, even though the events model is hidden.
+
+### Assigning categories to metrics
+
+Categories are a great way to organize your metrics in the catalog. You can create a new category by adding a new `categories` field to your `lightdash.config.yml` file, like so:
+
+```yml
+spotlight:
+  categories:
+    revenue: # Required, this is the name of the category, and how it will be referenced in the catalog. It must be unique.
+      label: Revenue # Required, this is what will be displayed in the catalog
+      color: "orange" # Optional, defaults to "gray", with the option to choose from a range of colors: "gray", "violet", "red", "orange", "green", "blue", "indigo", "pink", "yellow"
+```
+
+Now that you've added a category, you can assign metrics to it by adding a `categories` field to your models `.yml` file.
+
+```yml
+models:
+  - name: events
+    meta:
+      spotlight:
+        visibility: show
+        categories:
+          - revenue
+```
+
+This will add the `revenue` category to all metrics in the events model.
+
+If you want to add another category to a specific metric, you can do so by adding the `categories` field to the metric's `.yml` file. And remember, you can only add categories that have been defined in the `lightdash.config.yml` file.
+
+So in your `lightdash.config.yml` file, you need to have another category. Let's call it `marketing` and add it to the `event_count` metric, like so:
+
+```yml
+spotlight:
+  categories:
+    marketing:
+      label: Marketing
+      color: "blue"
+    revenue:
+      label: Revenue
+      color: "orange"
+```
+
+Now you can add the `marketing` category to the `event_count` metric:
+
+```yml
+models:
+  - name: events
+    meta:
+      spotlight:
+        visibility: show
+        categories:
+          - revenue
+    metrics:
+      - name: event_count
+        type: count
+        spotlight:
+          categories:
+            - marketing
+```
+
+In this example, the `event_count` metric will have both the `marketing` and `revenue` categories, it's cumulative.
+
+Once you compile your project, you'll see the `event_count` metric in the catalog with both the `marketing` and `revenue` categories and you can use this to filter your metrics in the catalog.
+
+:::info
+The categories you define need to be unique, so you can't have two categories with the same name. If you try to add a category with the same name as an existing category, you'll get an error. This error will be displayed in the UI and in the terminal (if you use the Lightdash CLI) when you compile your project.
+:::
+
+### Configuring default time settings in .yml
 
 We recommend setting up default time fields to make it easier for your business users and save them time.
 
@@ -177,6 +303,44 @@ Not yet, but soon you'll be able to manage metadata directly in the UI and sync 
 1. **Metrics with defaults in `.yml`:** Metrics with a default time dimension specified in the `.yml` file will always appear.
 2. **Metrics with a single time dimension:** Metrics from tables with only one time dimension will appear as it's assumed to be the most relevant.
 3. **Metrics from joined tables:** Metrics from joined tables that meet the criteria in points 1 and 2 will also appear.
+
+**e. How can I be sure that my yml changes are correct?**
+
+If you use VSCode, you can use our Lightdash schema validation to check your yml files are correct.
+
+1. Install this YAML extention for VSCode: https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml
+2. Open you user settings in JSON format and add the following:
+
+```json
+"[yaml]": {
+  "editor.defaultFormatter": "redhat.vscode-yaml"
+},
+"yaml.schemas": {
+  "https://raw.githubusercontent.com/lightdash/lightdash/refs/heads/main/packages/common/src/schemas/json/lightdash-dbt-2.0.json": [
+    "*.yml",
+    "/**/models/**/*.yml",
+    "/**/models/**/*.yaml",
+    "!lightdash.config.yml",
+    "!dbt_project.yml"
+  ],
+  "https://raw.githubusercontent.com/lightdash/lightdash/refs/heads/main/packages/common/src/schemas/json/lightdash-project-config-1.0.json": [
+    "lightdash.config.yml"
+  ]
+}
+```
+
+This will add schema validation to your model yml files and your lightdash.config.yml file.
+
+3. Reload VSCode
+
+4. You'll see a red squiggly line under any errors in your yml files as well as suggestions for how to fix them and what is allowed.
+
+<img
+  src={VSCodeSchemaValidationExample}
+  width="400"
+  height="200"
+  style={{ display: "block", margin: "0 auto 20px auto" }}
+/>
 
 ## Roles and permissions
 
