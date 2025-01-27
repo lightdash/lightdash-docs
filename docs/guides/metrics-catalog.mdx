@@ -79,6 +79,7 @@ See this video for an example on how to set this up:
     position: "relative",
     paddingBottom: "56.25%",
     height: "0",
+    marginBottom: "40px",
   }}
 >
   <iframe
@@ -97,7 +98,9 @@ See this video for an example on how to set this up:
   ></iframe>
 </div>
 
-To recap, you can set the default visibility of metrics in the catalog by adding the following to your `lightdash.config.yml` file:
+**Step-by-step guide**
+
+1. Add the following to your `lightdash.config.yml` file:
 
 ```yml
 spotlight:
@@ -110,7 +113,7 @@ The default visibility can be set to `show` or `hide`. If you don't set this, th
 
 This will set the default visibility of metrics in the catalog to `show` for all metrics in your project. You can also set this to `hide` if you prefer to hide metrics by default and then override this on a per-model/metric basis.
 
-Now that you've set the default visibility, you can override this on a per-model/metric basis.
+2. Now that you've set the default visibility, you can override this on a per-model/metric basis.
 
 ```yml
 models:
@@ -122,7 +125,7 @@ models:
 
 This will hide the events model from the catalog.
 
-If there are metrics in the events model that you want to make visible, you can override the default visibility for those metrics.
+3. If there are metrics in the events model that you want to make visible, you can override the default visibility for those metrics.
 
 ```yml
 models:
@@ -137,19 +140,20 @@ models:
           visibility: show
 ```
 
-This will make the `event_count` metric visible in the catalog, even though the events model is hidden.
+4. Once you compile your project, you'll see the `event_count` metric in the catalog, even though the events model is hidden.
 
 ### Assigning categories to metrics
 
 Categories are a great way to organize your metrics in the catalog. You can create a new category by adding a new `categories` field to your `lightdash.config.yml` file.
 
-Here's an example of how to set this up:
+Here's a video showing how to set this up:
 
 <div
   style={{
     position: "relative",
     paddingBottom: "56.25%",
     height: "0",
+    marginBottom: "40px",
   }}
 >
   <iframe
@@ -168,7 +172,9 @@ Here's an example of how to set this up:
   ></iframe>
 </div>
 
-To set this up, you need to add the following to your `lightdash.config.yml` file:
+**Step-by-step guide**
+
+1. Add the following to your `lightdash.config.yml` file:
 
 ```yml
 spotlight:
@@ -178,7 +184,7 @@ spotlight:
       color: "orange" # Optional, defaults to "gray", with the option to choose from a range of colors: "gray", "violet", "red", "orange", "green", "blue", "indigo", "pink", "yellow"
 ```
 
-Now that you've added a category, you can assign metrics to it by adding a `categories` field to your models `.yml` file.
+2. Now that you've added a category, you can assign metrics to it by adding a `categories` field to your models `.yml` file.
 
 ```yml
 models:
@@ -194,7 +200,8 @@ This will add the `revenue` category to all metrics in the events model.
 
 If you want to add another category to a specific metric, you can do so by adding the `categories` field to the metric's `.yml` file. And remember, you can only add categories that have been defined in the `lightdash.config.yml` file.
 
-So in your `lightdash.config.yml` file, you need to have another category. Let's call it `marketing` and add it to the `event_count` metric, like so:
+3. Now you can add the `marketing` category to the `event_count` metric:
+   So in your `lightdash.config.yml` file, you need to have another category. Let's call it `marketing` and add it to the `event_count` metric, like so:
 
 ```yml
 spotlight:
@@ -227,7 +234,7 @@ models:
 
 In this example, the `event_count` metric will have both the `marketing` and `revenue` categories, it's cumulative.
 
-Once you compile your project, you'll see the `event_count` metric in the catalog with both the `marketing` and `revenue` categories and you can use this to filter your metrics in the catalog.
+4. Once you compile your project, you'll see the `event_count` metric in the catalog with both the `marketing` and `revenue` categories and you can use this to filter your metrics in the catalog.
 
 :::info
 The categories you define need to be unique, so you can't have two categories with the same name. If you try to add a category with the same name as an existing category, you'll get an error. This error will be displayed in the UI and in the terminal (if you use the Lightdash CLI) when you compile your project.
