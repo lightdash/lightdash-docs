@@ -72,6 +72,27 @@ All through your Lightdash `.yml` files.
 
 You can control the visibility of metrics in the catalog by creating a new file called `lightdash.config.yml` in the root of your dbt project.
 
+See this video for an example on how to set this up:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0;">
+  <iframe
+    src="https://www.loom.com/embed/6bf1c5115090413490bf93b1ada60c31?sid=d29adbd1-e62c-4e37-bfc5-d6f71b7b149c"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+    }}
+  ></iframe>
+</div>
+
+To recap, you can set the default visibility of metrics in the catalog by adding the following to your `lightdash.config.yml` file:
+
 ```yml
 spotlight:
   default_visibility: show
@@ -114,7 +135,28 @@ This will make the `event_count` metric visible in the catalog, even though the 
 
 ### Assigning categories to metrics
 
-Categories are a great way to organize your metrics in the catalog. You can create a new category by adding a new `categories` field to your `lightdash.config.yml` file, like so:
+Categories are a great way to organize your metrics in the catalog. You can create a new category by adding a new `categories` field to your `lightdash.config.yml` file.
+
+Here's an example of how to set this up:
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0;">
+  <iframe
+    src="https://www.loom.com/embed/6ab64c402aa74c34a66da3e7664b6c99?sid=8410b682-2696-45b8-bca1-47b255c7457a"
+    frameborder="0"
+    webkitallowfullscreen
+    mozallowfullscreen
+    allowfullscreen
+    style={{
+      position: "absolute",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+    }}
+  ></iframe>
+</div>
+
+To set this up, you need to add the following to your `lightdash.config.yml` file:
 
 ```yml
 spotlight:
