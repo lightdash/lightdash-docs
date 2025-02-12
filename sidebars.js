@@ -200,12 +200,12 @@ module.exports = {
                                     id: 'references/virtual-views',
                                     label: 'Virtual Views',
                                 },
-                                {
-                                    type: 'doc',
-                                    id: 'references/dbt-write-back',
-                                    label: 'dbt Write Back',
-                                },
                             ]
+                        },
+                        {
+                            type: 'doc',
+                            id: 'references/dbt-write-back',
+                            label: 'dbt Write Back',
                         },
                         {
                             type: 'doc',
