@@ -2,24 +2,27 @@ import dbtWriteBack from './assets/dbt-write-back.jpg';
 import WriteBackPullRequest from './assets/write-back-pull-request.jpg';
 import TablesConfigurationWriteBack from './assets/tables-configuration-write-back.jpg';
 import dbtCloudRunAutomatically from './assets/dbt-cloud-run-automatically.jpg';
+import writeBackMetrics from './assets/write-back-metrics.jpg':
 
 # dbt Write-Back
 
-dbt Write-Back allows you to create models in dbt from queries you've built in the [SQL Runner](/references/sql-runner). You can then explore these models as Tables in Lightdash. Unlike [Virtual Views](/references/virtual-views), these models will be saved to and managed in your dbt project.
+dbt Write-Back allows you to develop your models and metrics in Lightdash and write back these changes to your dbt project. You can use write back to develop models in the [SQL Runner](/references/sql-runner) or develop metrics using [custom metrics](/references/custom-fields#custom-metrics) in the Explorer. Writing back to dbt will create a new branch and start a pull request in your dbt project so you can save and manage these changes in your dbt project.
 
-We recommend using dbt Write-Back if you're planning to use a query regularly so it can be governed and managed like other dbt models available in your Lightdash project.
+
+We recommend using dbt Write-Back if you're planning to use a query or metric regularly so it can be governed and managed like other dbt models and metrics available in your Lightdash project.
 
 :::info
 
-dbt Write-Back is currently only available for dbt projects hosted in GitHub.
+- dbt Write-Back is currently only available for dbt projects hosted in GitHub. 
+- You need to have at least `developer` permissions in a project to use dbt Write-Back.
 
 :::
 
-## Getting started with dbt Write-Back
+## Write-Back models from the SQL Runner
 
-Writing back to dbt will create a new branch and start a pull request in your dbt project to create a new .sql and .yml file based off of your SQL Runner query.
+You can use Lightdash to build models in dbt from queries that you've built in the SQL runner. We recommend writing back models from the SQL runner if you're planning to use the query regularly so it can be easily used, governed and managed like other dbt models in your Lightdash project.
 
-To get started, select the `Write back to dbt` option from the `save` drop-down.
+To get started, build and run a query in the SQL runner, then select the `Write back to dbt` option from the `save` drop-down.
 
 <img
   src={dbtWriteBack}
@@ -81,5 +84,28 @@ To create a job that does this, you'll want to:
   src={dbtCloudRunAutomatically}
   width="707"
   height="354"
+  style={{ display: 'block', margin: '0 auto 20px auto' }}
+/>
+
+## Write-Back metrics from custom metrics
+
+You can build custom metrics in Lightdash and write these back to your dbt project. 
+
+We recommend using dbt write-back for custom metrics that you're using/creating frequently so they become metrics that are reusable, governed and available for everyone else to build from.
+
+:::info 
+
+**What's the difference between a metric and a custom metric?**
+
+[Metrics](/references/metrics) written to your dbt project (or YAML metrics) are reusable by everyone in your project and will show up in the list of available metrics for a Table. [Custom metrics](/references/custom-fields#custom-metrics) are only saved in the chart they're used in and will not be saved in the list of `metrics` available if you open the same Table to build a new chart. 
+
+:::
+
+To get started, create a [custom metric](/references/custom-fields#custom-metrics) in the Explorer. Hover over the custom metric in the sidebar and click on the three-dot menu, then `write back to dbt`. 
+
+<img
+  src={writeBackMetrics}
+  width="715"
+  height="894"
   style={{ display: 'block', margin: '0 auto 20px auto' }}
 />
