@@ -18,6 +18,29 @@ We recommend using dbt Write-Back if you're planning to use a query or metric re
 
 :::
 
+## Write-Back metrics from custom metrics
+
+You can build custom metrics in Lightdash and write these back to your dbt project. 
+
+We recommend using dbt write-back for custom metrics that you're using/creating frequently so they become metrics that are reusable, governed and available for everyone else to build from.
+
+:::info 
+
+**What's the difference between a metric and a custom metric?**
+
+[Metrics](/references/metrics) written to your dbt project (or YAML metrics) are reusable by everyone in your project and will show up in the list of available metrics for a Table. [Custom metrics](/references/custom-fields#custom-metrics) are only saved in the chart they're used in and will not be saved in the list of `metrics` available if you open the same Table to build a new chart. 
+
+:::
+
+To get started, create a [custom metric](/references/custom-fields#custom-metrics) in the Explorer. Hover over the custom metric in the sidebar and click on the three-dot menu, then `write back to dbt`. 
+
+<img
+  src={writeBackMetrics}
+  width="715"
+  height="894"
+  style={{ display: 'block', margin: '0 auto 20px auto' }}
+/>
+
 ## Write-Back models from the SQL Runner
 
 You can use Lightdash to build models in dbt from queries that you've built in the SQL runner. We recommend writing back models from the SQL runner if you're planning to use the query regularly so it can be easily used, governed and managed like other dbt models in your Lightdash project.
@@ -84,28 +107,5 @@ To create a job that does this, you'll want to:
   src={dbtCloudRunAutomatically}
   width="707"
   height="354"
-  style={{ display: 'block', margin: '0 auto 20px auto' }}
-/>
-
-## Write-Back metrics from custom metrics
-
-You can build custom metrics in Lightdash and write these back to your dbt project. 
-
-We recommend using dbt write-back for custom metrics that you're using/creating frequently so they become metrics that are reusable, governed and available for everyone else to build from.
-
-:::info 
-
-**What's the difference between a metric and a custom metric?**
-
-[Metrics](/references/metrics) written to your dbt project (or YAML metrics) are reusable by everyone in your project and will show up in the list of available metrics for a Table. [Custom metrics](/references/custom-fields#custom-metrics) are only saved in the chart they're used in and will not be saved in the list of `metrics` available if you open the same Table to build a new chart. 
-
-:::
-
-To get started, create a [custom metric](/references/custom-fields#custom-metrics) in the Explorer. Hover over the custom metric in the sidebar and click on the three-dot menu, then `write back to dbt`. 
-
-<img
-  src={writeBackMetrics}
-  width="715"
-  height="894"
   style={{ display: 'block', margin: '0 auto 20px auto' }}
 />
