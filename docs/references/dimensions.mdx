@@ -213,6 +213,7 @@ Example format expressions:
 | Raw Value   | Formatted value | Format expression  |
 | ----------- | --------------- | ------------------ | 
 | 100000.00   | 100,00.00 km    | '#,##0.00" km"'    | 
+| 12345232    | 12345232        | '0'                |
 | 56.7856     | 57              | '#,##0'            |
 | 15430.75436 | $15,430.75      | '[$]#,##0.00'      | 
 | 15430.75436 | $15K            | '[$]#,##0,"K"'     | 
@@ -257,7 +258,7 @@ These are the options:
 | eur     | '[€]#,##0.00'                  | Adds the `€` symbol to your number value                                            | 10         | €10.00          |
 | jpy     | '[¥]#,##0.00'                  | Adds the `¥` symbol to your number value                                            | 10         | ¥10             |
 | percent | '#,##0.00%'                    | Adds the `%` symbol and multiplies your value by 100                                | 0.1        | %10             |
-| id      | No custom format expression    | Removes commas and spaces from number or string types so that they appear like IDs. | 12,389,572 | 12389572        |
+| id      | '0'                            | Removes commas and spaces from number or string types so that they appear like IDs. | 12389572   | 12389572        |
 
 #### Compact (legacy)
 
