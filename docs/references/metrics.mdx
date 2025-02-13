@@ -397,6 +397,18 @@ metrics:
     format: '0.00%' # 0.67895243 will appear as '67.89%
 ```
 
+Example format expressions:
+
+| Raw Value   | Formatted value | Format expression  |
+| ----------- | --------------- | ------------------ | 
+| 100000.00   | 100,00.00 km    | '#,##0.00" km"'    | 
+| 56.7856     | 57              | '#,##0'            |
+| 15430.75436 | $15,430.75      | '[$]#,##0.00'      | 
+| 15430.75436 | $15K            | '[$]#,##0,"K"'     | 
+| 15430.75436 | $15.43K         | '[$]#,##0.00,"K"'  | 
+| 13334567    | $13.33M         | '[$]#,##0.00,,"M"' |
+| 0.6758      | 67.58%          | '#,##0.00%'        | 
+
 <details>
   <summary>(Legacy) format, compact, and round options</summary>
 
@@ -458,10 +470,10 @@ You can compact values in your YAML. For example, if I wanted all of my revenue 
 
 | Value     | Alias              | Equivalent format expression            | Example output |
 | --------- | ------------------ | --------------------------------------- | -------------- |
-| thousands | "K" and "thousand" | '$#,##0," K"' or '$#,##0.00," K"'       | 1K             |
-| millions  | "M" and "million"  | '$#,##0,," M"' or '$#,##0.00,," M"'     | 1M             |
-| billions  | "B" and "billion"  | '$#,##0,,," B"' or '$#,##0.00,,," B"'   | 1B             |
-| trillions | "T" and "trillion" | '$#,##0,,,," T"' or '$#,##0.00,,,," T"' | 1T             |
+| thousands | "K" and "thousand" | '#,##0," K"' or '#,##0.00," K"'       | 1K             |
+| millions  | "M" and "million"  | '#,##0,," M"' or '#,##0.00,," M"'     | 1M             |
+| billions  | "B" and "billion"  | '#,##0,,," B"' or '#,##0.00,,," B"'   | 1B             |
+| trillions | "T" and "trillion" | '#,##0,,,," T"' or '#,##0.00,,,," T"' | 1T             |
 
 #### Round (legacy)
 
