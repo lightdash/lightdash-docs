@@ -208,7 +208,7 @@ metrics:
 ```
 
 <details>
-  <summary><b>Legacy `format`, `compact`, and `round` options</b></summary>
+  <summary>(Legacy) format, round, and compact options</summary>
 
 Spreadsheet-style format expressions are the recommended way of adding formatting to your metrics in Lightdash. There are legacy formatting options, listed below, which are less flexible than the spreadsheet-style formatting. 
 
@@ -218,7 +218,7 @@ If you use both legacy and spreadsheet-style formatting options for a single dim
 
 :::
 
-### Format (legacy)
+#### Format (legacy)
 
 ```yaml
 version: 2
@@ -246,7 +246,7 @@ These are the options:
 | percent | Adds the `%` symbol and multiplies your value by 100                                | 0.1        | %10             |
 | id      | Removes commas and spaces from number or string types so that they appear like IDs. | 12,389,572 | 12389572        |
 
-### Compact (legacy)
+#### Compact (legacy)
 
 You can compact values in your YAML. For example, if I wanted all of my revenue values to be shown in thousands (e.g. `1,500` appears as `1.50K`), then I would write something like this in my .yml:
 
@@ -268,7 +268,7 @@ You can compact values in your YAML. For example, if I wanted all of my revenue 
 | billions  | "B" and "billion"  | 1B             |
 | trillions | "T" and "trillion" | 1T             |
 
-### Round (legacy)
+#### Round (legacy)
 
 You can round values to appear with a certain number of decimal points.
 
