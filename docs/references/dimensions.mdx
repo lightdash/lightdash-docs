@@ -55,8 +55,7 @@ models:
             description: 'My custom description' # you can override the description you'll see in Lightdash here
             sql: 'IF(${TABLE}.revenue_gbp_total_est = NULL, 0, ${registered_user_email})' # custom SQL applied to the column from dbt used to define the dimension
             hidden: false
-            round: 2
-            format: '"£"#,##0.00' # GBP rounded to two decimal points
+            format: '[£]#,##0.00' # GBP rounded to two decimal points
             groups: ['finance']
       - name: forecast_date
         description: 'Date of the forecasting.'
@@ -101,7 +100,7 @@ All the properties you can customize:
 | sql                                         | No       | string                                                                                                                                            | Custom SQL applied to the column used to define the dimension.                                                                                                                                                                                             |
 | [time_intervals](#time-intervals)           | No       | `'default'` or `OFF` or an array[] containing elements of [date](#date-options), [numeric](#numeric-options) or [string](#string-options) options | `'default'` (or not setting the `time_intervals` property) will be converted into `['DAY', 'WEEK', 'MONTH', 'YEAR']` for dates and `['RAW', 'DAY', 'WEEK', 'MONTH', 'YEAR']` for timestamps; if you want no time intervals set `'OFF'`.                    |
 | hidden                                      | No       | boolean                                                                                                                                           | If set to `true`, the dimension is hidden from Lightdash. By default, this is set to `false` if you don't include this property.                                                                                                                           |
-| [format](#format)                           | No       | string                                                                                                                                            | This option will format the output value on the result table and CSV export. Currently supports one of the following: `['km', 'mi', 'usd', 'gbp', 'eur', 'percent', 'id']`                                                                                 |
+| [format](#format)                           | No       | string                                                                                                                                            | This option will format the output value on the results table and CSV export. Supports spreadsheet-style formatting (e.g. #,##0.00). Use [this website](https://customformats.com/) to help build your custom format.`                                                                                 |
 | [groups](#groups)                           | No       | string or string[]                                                                                                                                | If you set this property, the dimension will be grouped in the sidebar with other dimensions with the same group label.                                                                                                                                    |
 | [urls](#urls)                               | No       | Array of { url, label }                                                                                                                           | Adding urls to a dimension allows your users to click dimension values in the UI and take actions, like opening an external tool with a url, or open at a website. You can use liquid templates to customise the link based on the value of the dimension. |
 | [required_attributes](#required-attributes) | No       | Object with { user_attribute, value }                                                                                                             | Limits access to users with those attributes                                                                                                                                                                                                               |
@@ -195,16 +194,18 @@ You can use the `format` parameter to have your dimensions show in a particular 
 To help you build your format expression, we recommend using https://customformats.com/.
 
 ```yaml
-metrics:
-  total_us_revenue:
-    type: sum
-    description: 'Total revenue in USD, with two decimal places, compacted to thousands'
-    format: '$#,##0.00," K"' # 505,430 will appear as '$505.43 K'
-  percent_of_total_global_revenue:
-    type: number
-    description: 'Percent of total global revenue coming from US revenue.'
-    sql: ${total_us_revenue} / ${total_global_revenue}
-    format: '0.00%' # 0.67895243 will appear as '67.89%
+- name: us_revenue
+  meta:
+    dimension:
+      type: number
+      description: 'Revenue in USD, with two decimal places, compacted to thousands'
+      format: '$#,##0.00," K"' # 505,430 will appear as '$505.43 K'
+    additional_dimensions:
+      percent_of_global_revenue:
+        type: number
+        description: 'Percent of total global revenue coming from US revenue.'
+        sql: ${us_revenue} / ${global_revenue}
+        format: '0.00%' # 0.67895243 will appear as '67.89%
 ```
 
 <details>
@@ -235,16 +236,16 @@ models:
 
 These are the options:
 
-| Option  | Description                                                                         | Raw value  | Displayed value |
-| ------- | ----------------------------------------------------------------------------------- | ---------- | --------------- |
-| km      | Adds the suffix `km` to your value                                                  | 10         | 10 km           |
-| mi      | Adds the suffix `mile` to your value                                                | 10         | 10 mi           |
-| usd     | Adds the `$` symbol to your number value                                            | 10         | $10.00          |
-| gbp     | Adds the `£` symbol to your number value                                            | 10         | £10.00          |
-| eur     | Adds the `€` symbol to your number value                                            | 10         | €10.00          |
-| jpy     | Adds the `¥` symbol to your number value                                            | 10         | ¥10             |
-| percent | Adds the `%` symbol and multiplies your value by 100                                | 0.1        | %10             |
-| id      | Removes commas and spaces from number or string types so that they appear like IDs. | 12,389,572 | 12389572        |
+| Option  | Equivalent format expression   | Description                                                                         | Raw value  | Displayed value |
+| ------- | ------------------------------ | ----------------------------------------------------------------------------------- | ---------- | --------------- |
+| km      | '#,##0.00" km"'                | Adds the suffix `km` to your value                                                  | 10         | 10 km           |
+| mi      | '#,##0.00" mi"'                | Adds the suffix `mile` to your value                                                | 10         | 10 mi           |
+| usd     | '[$]#,##0.00'                  | Adds the `$` symbol to your number value                                            | 10         | $10.00          |
+| gbp     | '[£]#,##0.00'                  | Adds the `£` symbol to your number value                                            | 10         | £10.00          |
+| eur     | '[€]#,##0.00'                  | Adds the `€` symbol to your number value                                            | 10         | €10.00          |
+| jpy     | '[¥]#,##0.00'                  | Adds the `¥` symbol to your number value                                            | 10         | ¥10             |
+| percent | '#,##0.00%'                    | Adds the `%` symbol and multiplies your value by 100                                | 0.1        | %10             |
+| id      | No custom format expression    | Removes commas and spaces from number or string types so that they appear like IDs. | 12,389,572 | 12389572        |
 
 #### Compact (legacy)
 
@@ -261,12 +262,12 @@ You can compact values in your YAML. For example, if I wanted all of my revenue 
 	          compact: thousands # You can also use 'K'
 ```
 
-| Value     | Alias              | Example output |
-| --------- | ------------------ | -------------- |
-| thousands | "K" and "thousand" | 1K             |
-| millions  | "M" and "million"  | 1M             |
-| billions  | "B" and "billion"  | 1B             |
-| trillions | "T" and "trillion" | 1T             |
+| Value     | Alias              | Equivalent format expression            | Example output |
+| --------- | ------------------ | --------------------------------------- | -------------- |
+| thousands | "K" and "thousand" | '$#,##0," K"' or '$#,##0.00," K"'       | 1K             |
+| millions  | "M" and "million"  | '$#,##0,," M"' or '$#,##0.00,," M"'     | 1M             |
+| billions  | "B" and "billion"  | '$#,##0,,," B"' or '$#,##0.00,,," B"'   | 1B             |
+| trillions | "T" and "trillion" | '$#,##0,,,," T"' or '$#,##0.00,,,," T"' | 1T             |
 
 #### Round (legacy)
 
@@ -280,7 +281,7 @@ You can round values to appear with a certain number of decimal points.
 	    - name: revenue
 	      meta:
 	        dimension:
-	          round: 0
+	          round: 0 # equivalent format expression: '#,##0.0'
 ```
 
 </details>
