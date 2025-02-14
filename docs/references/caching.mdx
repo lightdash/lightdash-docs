@@ -6,13 +6,13 @@ import DashboardCacheTime from './assets/dashboard-cache-time.png';
 
 Lightdash supports two types of caching:
 
-1. **[Cached Filter values](#filter-value-caching)** - enabled for everyone without requiring any configuration.
+1. **[Cached Filter values](#filter-value-caching)** - enabled for every cloud user without requiring any configuration.
 2. **[Cached results for Charts and Dashboards](#chart-and-dashboard-results-caching)** - beta feature that must be enabled by the Lightdash team. This feature is only available for Pro, Enterprise, and self-hosted users since it requires a dedicated Lightdash instance.
 
 
 ## Filter value caching 
 
-This type of caching works without any configuration. You'll see a message in your filter values that tells you when the cached filter values were loaded from (usually within the last day). If you want to refresh the filter values, you can click on that message and the values will be refreshed. 
+This type of caching works without any configuration for cloud users. You'll see a message in your filter values that tells you when the cached filter values were loaded from (usually within the last day). If you want to refresh the filter values, you can click on that message and the values will be refreshed.
 
 <img
   src={CachedFilter}
@@ -35,7 +35,7 @@ Caching popular charts and dashboards will reduce warehouse costs to the organiz
 
 This is how various areas of Lightdash work (or don't work) with cached results. 
 
-- All table queries are currently cached, even when using the query builder before a chart is saved. In the future Lightdash will [likely disable caching in the query builder](https://github.com/lightdash/lightdash/issues/12697) since most of these queries are one-off explorations and don't benefit from caching.
+- Queries in the Query Builder, when creating or updating a saved chart, are NOT cached because they are typically one-off explorations that don’t benefit from caching.
 - Saved Charts are cached based on the last refresh in any context (edit mode, view mode, dashboard refresh, etc.)
 - Dashboard tiles will use the cache from Saved Charts they reference.
 - Scheduled Deliveries generate and use cached results. 
