@@ -209,6 +209,11 @@ module.exports = {
                         },
                         {
                             type: 'doc',
+                            id: 'references/dbt-write-back',
+                            label: 'dbt Write Back',
+                        },
+                        {
+                            type: 'doc',
                             id: 'references/dashboards-as-code',
                             label: 'Dashboards as Code',
                         },
