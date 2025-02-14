@@ -55,7 +55,7 @@ models:
             description: 'My custom description' # you can override the description you'll see in Lightdash here
             sql: 'IF(${TABLE}.revenue_gbp_total_est = NULL, 0, ${registered_user_email})' # custom SQL applied to the column from dbt used to define the dimension
             hidden: false
-            format: '[£]#,##0.00' # GBP rounded to two decimal points
+            format: '[$£]#,##0.00' # GBP rounded to two decimal points
             groups: ['finance']
       - name: forecast_date
         description: 'Date of the forecasting.'
@@ -80,7 +80,7 @@ models:
               label: 'Day of Week (number)'
               sql: 'day_of_week(${date})'
             day_of_week_day:
-              type: string
+              type: date
               label: 'Day of Week (day)'
               sql: ${date}
               format: 'dddd'
@@ -254,9 +254,9 @@ These are the options:
 | km      | '#,##0.00" km"'                | Adds the suffix `km` to your value                                                  | 10         | 10 km           |
 | mi      | '#,##0.00" mi"'                | Adds the suffix `mile` to your value                                                | 10         | 10 mi           |
 | usd     | '[$]#,##0.00'                  | Adds the `$` symbol to your number value                                            | 10         | $10.00          |
-| gbp     | '[£]#,##0.00'                  | Adds the `£` symbol to your number value                                            | 10         | £10.00          |
-| eur     | '[€]#,##0.00'                  | Adds the `€` symbol to your number value                                            | 10         | €10.00          |
-| jpy     | '[¥]#,##0.00'                  | Adds the `¥` symbol to your number value                                            | 10         | ¥10             |
+| gbp     | '[$£]#,##0.00'                  | Adds the `£` symbol to your number value                                            | 10         | £10.00          |
+| eur     | '[$€]#,##0.00'                  | Adds the `€` symbol to your number value                                            | 10         | €10.00          |
+| jpy     | '[$¥]#,##0.00'                  | Adds the `¥` symbol to your number value                                            | 10         | ¥10             |
 | percent | '#,##0.00%'                    | Adds the `%` symbol and multiplies your value by 100                                | 0.1        | %10             |
 | id      | '0'                            | Removes commas and spaces from number or string types so that they appear like IDs. | 12389572   | 12389572        |
 
