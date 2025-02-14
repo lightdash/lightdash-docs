@@ -1,6 +1,7 @@
 import ClickableDimension from './assets/clickable-dimension-link.jpg';
 import PieChartColor from './assets/pie-chart-color.png';
 import Groups from './assets/groups.png';
+import FormatExpressionExamples from './../snippets/format-expression-examples.mdx';
 
 # Dimensions reference
 
@@ -208,23 +209,11 @@ To help you build your format expression, we recommend using https://customforma
         format: '0.00%' # 0.67895243 will appear as '67.89%
 ```
 
-Example format expressions:
-
-| Raw Value   | Formatted value | Format expression  |
-| ----------- | --------------- | ------------------ | 
-| 100000.00   | 100,00.00 km    | '#,##0.00" km"'    | 
-| 12345232    | 12345232        | '0'                |
-| 56.7856     | 57              | '#,##0'            |
-| 15430.75436 | $15,430.75      | '[$]#,##0.00'      | 
-| 15430.75436 | $15K            | '[$]#,##0,"K"'     | 
-| 15430.75436 | $15.43K         | '[$]#,##0.00,"K"'  | 
-| 13334567    | $13.33M         | '[$]#,##0.00,,"M"' |
-| 0.6758      | 67.58%          | '#,##0.00%'        | 
+<FormatExpressionExamples/>
 
 <details>
-  <summary>(Legacy) format, round, and compact options</summary>
-
-Spreadsheet-style format expressions are the recommended way of adding formatting to your metrics in Lightdash. There are legacy formatting options, listed below, which are less flexible than the spreadsheet-style formatting. 
+    <summary>(Legacy) format, round, and compact options</summary>
+Spreadsheet-style format expressions are the recommended way of adding formatting to your metrics in Lightdash. There are legacy formatting options, listed below, which are less flexible than the spreadsheet-style formatting.
 
 :::info
 
@@ -296,7 +285,6 @@ You can round values to appear with a certain number of decimal points.
 	        dimension:
 	          round: 0 # equivalent format expression: '#,##0.0'
 ```
-
 </details>
 
 ## Time intervals
