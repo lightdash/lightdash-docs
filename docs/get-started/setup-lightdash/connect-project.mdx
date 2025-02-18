@@ -16,7 +16,7 @@ import SelectSettings from './assets/select-settings.jpg';
 import ProjectConnectionSettings from './assets/project-connection-settings.jpg';
 import DbtConnectionSettings from './assets/dbt-connection-settings.jpg';
 import FineGrainedRepo from './assets/fine-grained-repo.png';
-import FineGrainedPermissions from './assets/fine-grained-permissions.png';
+import FineGrainedPermissions from './assets/fine-grained-permissions.jpg';
 
 # Update your project connection
 
@@ -703,7 +703,7 @@ You can read more about it on the [Github docs](https://docs.github.com/en/authe
 
 1. Go to [settings > Developer access > Personal access tokens > fine-grained token](https://github.com/settings/personal-access-tokens/new)
 2. Add the name, expiration, description and owner (we'll need their username later)
-3. Add repository access, you might want to give access only to your `dbt` repository
+3. Add the repositories you want Lightdash to access. You might want to give access only to the repository where your `dbt` project is located.
 
 <img
   src={FineGrainedRepo}
@@ -712,18 +712,16 @@ You can read more about it on the [Github docs](https://docs.github.com/en/authe
   style={{ display: 'block', margin: '0 auto 20px auto' }}
 />
 
-4. On repository permissions, select `Contents`
+4. On `Repository` permissions, select `Contents` --> `Read and Write` and `Pull Requests` --> `Read and Write`. 
 
 <img
   src={FineGrainedPermissions}
-  width="800"
-  height="91"
+  width="954"
+  height="262"
   style={{ display: 'block', margin: '0 auto 20px auto' }}
 />
 
 5. Click `Generate token` and copy the token.
-
-You could also replace your old tokens with new fine-grained tokens on project settings.
 
 #### Repository
 
