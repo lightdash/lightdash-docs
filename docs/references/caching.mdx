@@ -37,7 +37,7 @@ This is how various areas of Lightdash work (or don't work) with cached results.
 
 - Queries in the Query Builder, when creating or updating a saved chart, are NOT cached because they are typically one-off explorations that don’t benefit from caching.
 - Saved Charts are cached based on the last refresh in any context (edit mode, view mode, dashboard refresh, etc.)
-- Dashboard tiles will use the cache from Saved Charts they reference.
+- Dashboard and Embedded dashboard tiles will use the cache from Saved Charts they reference.
 - Scheduled Deliveries generate and use cached results. 
 - Charts built in SQL runner or semantic layer integrations are NOT cached.
 
