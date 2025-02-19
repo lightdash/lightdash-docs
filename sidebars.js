@@ -232,6 +232,7 @@ module.exports = {
                     },
                     items: [
                         'references/chart-types',
+                        'references/custom-charts',
                         {
                             type: 'doc',
                             id: 'get-started/exploring-data/dashboards',
@@ -244,7 +245,7 @@ module.exports = {
                         },
                         'references/custom-fields',
                         'references/table-calculations',
-                        'references/spaces',
+                        'references/spaces'                        
                     ],
                 },
                 {
