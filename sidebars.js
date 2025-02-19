@@ -245,7 +245,7 @@ module.exports = {
                         },
                         'references/custom-fields',
                         'references/table-calculations',
-                        'references/spaces'                        
+                        'references/spaces',
                     ],
                 },
                 {
