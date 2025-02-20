@@ -232,6 +232,7 @@ module.exports = {
                     },
                     items: [
                         'references/chart-types',
+                        'references/custom-charts',
                         {
                             type: 'doc',
                             id: 'get-started/exploring-data/dashboards',
