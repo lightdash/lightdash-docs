@@ -678,9 +678,15 @@ We don't support connecting Lightdash to [dbt Cloud managed repositories](https:
 
 ### GitHub
 
+There are two authorization methods for connecting to GitHub: [OAuth (recommended)](#oauth-recommended) or using a [Personal Access Token](#personal-access-token). The OAuth connection method is not linked to a single user, so if the user who set up the connection leaves your organization, the authentication will still work. The OAuth connection can also be edited by any admins of your connected GitHub repository. 
+
+#### OAuth (recommended)
+
+To connect to GitHub using OAuth, click on `Sign in with GitHub` to connect. Make sure to select the repository where your dbt project is located when authenticating the GitHub connection. 
+
 #### Personal access token
 
-You can create a personal access token (classic), or a fine-grained access token (beta).
+Personal access tokens can be used if you want to specify more granular access for your GitHub connection. You can create a personal access token (classic), or a fine-grained access token (beta).
 
 ##### Personal access token (classic)
 
