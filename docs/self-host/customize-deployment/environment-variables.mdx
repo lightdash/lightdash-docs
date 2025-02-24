@@ -27,6 +27,11 @@ This is a reference to all environment variables that can be used to configure a
 | `GROUPS_ENABLED`                             | Enables/Disables groups functionality                                                                                                                                                                         |           | `false`                                                         |
 | `AUTH_ENABLE_OIDC_LINKING`                   | Enables/Disables linking the new OIDC(aka SSO) identity to an existing user if they already have another OIDC with the same email                                                                             |           | `false`                                                         |
 | `CUSTOM_VISUALIZATIONS_ENABLED`              | Enables/Disables custom chart functionality                                                                                                                                                                   |           | `false`                                                         |
+| `LIGHTDASH_MAX_PAYLOAD`                      | Maximum HTTP request body size                                                                                                                                                                                |           | `5mb`                                                           |
+| `LIGHTDASH_LICENSE_KEY`                      | License key for Lightdash Enterprise Edition. [Talk to us about Lightdash Enterprise Edition](https://calendly.com/lightdash-cloud/enterprise?utm_source=docs&utm_medium=referral&utm_campaign=enterprise_licensing&utm_content=license_key_cta)                                                                |           |                                                                 |
+| `HEADLESS_BROWSER_HOST`                      | Hostname for the headless browser                                                                                                                                                                             |           | —                                                               |
+| `HEADLESS_BROWSER_PORT`                      | Port for the headless browser                                                                                                                                                                                 |           | `3001`                                                          |
+| `ALLOW_MULTIPLE_ORGS`                        | If set to `true`, new users registering on Lightdash will have their own organization, separated from others                                                                                                  |           | `false`                                                         |
 
 Lightdash also accepts all [standard postgres environment variables](https://www.postgresql.org/docs/9.3/libpq-envars.html)
 
@@ -122,3 +127,54 @@ These variables enable you to control Single Sign On (SSO) functionality.
 | `LIGHTDASH_CSP_REPORT_ONLY`     | Enables Content Security Policy (CSP) reporting only mode. This is recommended to be set to `false` in production. |           | `true`  |
 | `LIGHTDASH_CSP_ALLOWED_DOMAINS` | List of domains that are allowed to load resources from. Values must be separated by commas.                       |           |         |
 | `LIGHTDASH_CSP_REPORT_URI`      | URI to send CSP violation reports to.                                                                              |           |         |
+
+### Analytics & Event Tracking
+
+| Variable                     | Description                                                                                        | Required? | Default |
+| ---------------------------- | -------------------------------------------------------------------------------------------------- | --------- | ------- |
+| `RUDDERSTACK_WRITE_KEY`      | RudderStack key used to track events (by default Lightdash’s key is used)                          |           |         |
+| `RUDDERSTACK_DATA_PLANE_URL` | RudderStack data plane URL to which events are tracked (by default Lightdash’s data plane is used) |           |         |
+| `POSTHOG_PROJECT_API_KEY`    | API key for Posthog (by default Lightdash’s key is used)                                           |           |         |
+| `POSTHOG_FE_API_HOST`        | Hostname for Posthog’s front-end API                                                               |           |         |
+| `POSTHOG_BE_API_HOST`        | Hostname for Posthog’s back-end API                                                                |           |         |
+
+### AI Analyst
+
+These variables enable you to configure the [AI Analyst functionality](guides/ai-analyst.mdx).
+
+| Variable                              | Description                    | Required? | Default |
+| ------------------------------------- | ------------------------------ | --------- | ------- |
+| `OPENAI_API_KEY`                      | Required for AI Analyst        |           |         |
+| `OPENAI_MODEL_NAME`                   | Required for AI Analyst        |           |         |
+| `OPENAI_EMBEDDING_MODEL_NAME`         | Required for AI Analyst        |           |         |
+| `AI_COPILOT_ENABLED`                  | Required for AI Analyst        |           |         |
+| `AI_COPILOT_EMBEDDING_SEARCH_ENABLED` | Required for AI Analyst        |           |         |
+| `LANGCHAIN_TRACING_V2`                | Required for AI Analyst        |           |         |
+| `LANGCHAIN_ENDPOINT`                  | Required for AI Analyst        |           |         |
+| `LANGCHAIN_API_KEY`                   | Required for AI Analyst        |           |         |
+| `LANGCHAIN_PROJECT`                   | Required for AI Analyst        |           |         |
+
+### Slack Integration
+
+These variables enable you to configure the [Slack integration](guides/using-slack-integration.mdx).
+
+| Variable               | Description                     | Required?     | Default |
+| ---------------------- | ------------------------------- | ------------- | ------- |
+| `SLACK_SIGNING_SECRET` | Required for Slack integration  |               |         |
+| `SLACK_CLIENT_ID`      | Required for Slack integration  |               |         |
+| `SLACK_CLIENT_SECRET`  | Required for Slack integration  |               |         |
+| `SLACK_STATE_SECRET`   | Required for Slack integration  |               |         |
+
+### GitHub Integration
+
+These variables enable you to configure Github integrations
+
+| Variable                 | Description                                      | Required? | Default |
+| ------------------------ | ------------------------------------------------ | --------- | ------- |
+| `GITHUB_PRIVATE_KEY`     | GitHub private key for GitHub App authentication |           |         |
+| `GITHUB_APP_ID`          | GitHub Application ID                            |           |         |
+| `GITHUB_CLIENT_ID`       | GitHub OAuth client ID                           |           |         |
+| `GITHUB_CLIENT_SECRET`   | GitHub OAuth client secret                       |           |         |
+| `GITHUB_APP_NAME`        | Name of the GitHub App                           |           |         |
+| `GITHUB_REDIRECT_DOMAIN` | Domain for GitHub OAuth redirection              |           |         |
+
