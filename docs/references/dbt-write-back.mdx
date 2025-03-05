@@ -4,6 +4,9 @@ import TablesConfigurationWriteBack from './assets/tables-configuration-write-ba
 import dbtCloudRunAutomatically from './assets/dbt-cloud-run-automatically.jpg';
 import writeBackMetrics from './assets/write-back-metrics.jpg';
 import refreshAfterWriteback from './assets/refresh-after-write-back.jpg';
+import writeBackCustomDimension1 from './assets/write-back-custom-dimension-1.png';
+import writeBackCustomDimension2 from './assets/write-back-custom-dimension-2.png';
+import writeBackCustomDimension3 from './assets/write-back-custom-dimension-3.png';
 
 # dbt Write-Back
 
@@ -54,6 +57,74 @@ Once the pull request with your new metric is merged, you can click `refresh dbt
 Any custom metric that matches the definition of your new YAML metric will automatically be replaced by your YAML metric. This means if someone created the same custom metric, with the same, formatting, filtering, etc. in another saved chart, it will also be replaced automatically with your new YAML metric.
 
 :::
+
+## Write-Back dimensions from custom dimensions
+
+You can build custom dimensions in Lightdash and write these back to your dbt project.
+
+We recommend using dbt write-back for custom dimensions that you're using/creating frequently so they become dimensions that are reusable, governed and available for everyone else to build from.
+
+:::info
+
+**What's the difference between a dimension and a custom dimension?**
+
+[Dimensions](/references/dimensions) written to your dbt project (or YAML dimensions) are reusable by everyone in your project and will show up in the list of available dimensions for a Table. [Custom dimensions](/references/custom-fields#custom-dimensions) are only saved in the chart they're used in and will not be saved in the list of `dimensions` available if you open the same Table to build a new chart.
+
+:::
+
+To get started, create a [custom dimension](/references/custom-fields#custom-dimensions) in the Explorer. Hover over the custom dimension in the sidebar and click on the three-dot menu, then `write back to dbt`.
+
+1. Click `write back to dbt`
+<img
+    src={writeBackCustomDimension1}
+    width="644"
+    height="805"
+    style={{display: 'block', margin: '0 auto 20px auto'}}
+/>
+2. Preview the dimension YAML and open a Pull Request.
+<img
+    src={writeBackCustomDimension2}
+    width="644"
+    height="805"
+    style={{display: 'block', margin: '0 auto 20px auto'}}
+/>
+3. Approve and merge the Pull Request in your dbt project.
+<img
+    src={writeBackCustomDimension3}
+    width="644"
+    height="805"
+    style={{display: 'block', margin: '0 auto 20px auto'}}
+/>
+
+Once the pull request with your new dimension is merged, you can click `refresh dbt` in Lightdash (or, if you're [using GitHub actions](../guides/cli/how-to-use-lightdash-deploy#automatically-deploy-your-changes-to-lightdash-using-a-github-action), your project will automatically refresh once your changes are merged).
+
+### Known limitations
+
+#### Fixed number of bins
+
+This bin type cannot be moved to dbt as it requires a CTE to pre-calculate the values.
+We recommend users moving the bin logic to dbt and creating a new dimension in dbt.
+
+#### Preview binning SQL
+
+When writing back a bin dimension, the SQL shown in the preview may not have the correct column references and syntax.
+Please ensure the SQL is correct before merging the pull request.
+
+Example preview:
+```
+order_id_test_bin:
+  label: Test bin
+  type: string
+  sql: >-
+    /* This is a preview! Replace column references and confirm SQL before using in production. */
+    CONCAT(FLOOR(${reference_column} / 10) * 10, ' - ',
+    (FLOOR(${reference_column} / 10) + 1) * 10 - 1)
+```
+
+#### Replace custom dimensions with new dimension
+
+This is not possible at the moment. If you have a custom dimension that you want to replace with a new dimension, you will need to manually update the chart configuration.
+
 
 ## Write-Back models from the SQL Runner
 
