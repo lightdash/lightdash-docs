@@ -100,26 +100,9 @@ Once the pull request with your new dimension is merged, you can click `refresh 
 
 ### Known limitations
 
-#### Fixed number of bins
+#### Bin dimensions
 
-This bin type cannot be moved to dbt as it requires a CTE to pre-calculate the values.
-We recommend users moving the bin logic to dbt and creating a new dimension in dbt.
-
-#### Preview binning SQL
-
-When writing back a bin dimension, the SQL shown in the preview may not have the correct column references and syntax.
-Please ensure the SQL is correct before merging the pull request.
-
-Example preview:
-```
-order_id_test_bin:
-  label: Test bin
-  type: string
-  sql: >-
-    /* This is a preview! Replace column references and confirm SQL before using in production. */
-    CONCAT(FLOOR(${reference_column} / 10) * 10, ' - ',
-    (FLOOR(${reference_column} / 10) + 1) * 10 - 1)
-```
+Writing back bin dimensions is not supported at the moment. If you want to help test our beta feature, please reach out to support.
 
 #### Replace custom dimensions with new dimension
 
