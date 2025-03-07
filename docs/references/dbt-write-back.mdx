@@ -104,9 +104,9 @@ Once the pull request with your new dimension is merged, you can click `refresh 
 
 Writing back bin dimensions is not supported at the moment. If you want to help test our beta feature, please reach out to support.
 
-#### Replace custom dimensions with new dimension
+#### Write-back dimensions automatically replacing custom dimensions
 
-This is not possible at the moment. If you have a custom dimension that you want to replace with a new dimension, you will need to manually update the chart configuration.
+At the moment, if you write back a custom dimension to your dbt project's YAML, the custom dimension will not be automatically replaced with the new, YAML dimension. Once your new dimension is created in dbt, you'll need to manually update your charts and replace the custom dimensions with the new dimension. 
 
 
 ## Write-Back models from the SQL Runner
