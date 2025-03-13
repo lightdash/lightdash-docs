@@ -1,3 +1,12 @@
+# 🚨🚨🚨 **REPOSITORY MOVED!** 🚨🚨🚨  
+
+## ⚠️ **This repository has been moved!** ⚠️  
+### 👉 **New location:** [https://github.com/lightdash/mintlify-docs](https://github.com/lightdash/mintlify-docs)  
+
+❌ **Do NOT open issues or pull requests here.**  
+✅ **Go to the new repository instead!**  
+
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/0ed2850c-dbab-4c76-8bfe-c3706712fe34/deploy-status)](https://app.netlify.com/sites/peaceful-bassi-cbf284/deploys)
 
 
