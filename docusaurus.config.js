@@ -11,7 +11,7 @@ module.exports = {
     onBrokenMarkdownLinks: 'warn',
     favicon: 'img/favicon-32x32.png', // TODO update
     organizationName: 'lightdash', // Usually your GitHub org/user name.
-    projectName: 'lightdash', // Usually your repo name.
+    projectName: 'lightdash-docs',
     plugins: [
         [
             path.resolve(__dirname, 'docusaurus-rudderstack-plugin'),
@@ -102,7 +102,7 @@ module.exports = {
                     position: 'left',
                 },
                 {
-                    href: 'https://github.com/lightdash/lightdash',
+                    href: 'https://github.com/lightdash/lightdash-docs',
                     position: 'right',
                     className: 'header-github-link',
                     'aria-label': 'GitHub repository',
@@ -120,7 +120,7 @@ module.exports = {
             links: [
                 {
                     label: 'Community',
-                    href: 'https://github.com/lightdash/lightdash/discussions',
+                    href: 'https://github.com/lightdash/lightdash-docs/discussions',
                 },
                 {
                     label: 'Blog',
@@ -149,9 +149,8 @@ module.exports = {
                 docs: {
                     sidebarPath: require.resolve('./sidebars.js'),
                     routeBasePath: '/',
-                    // Please change this to your repo.
                     editUrl:
-                        'https://github.com/lightdash/lightdash/edit/main/docs/',
+                        'https://github.com/lightdash/lightdash-docs/edit/main/',
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
